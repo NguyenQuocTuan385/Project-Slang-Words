@@ -5,8 +5,7 @@ import java.io.FileWriter;
 import java.util.*;
 
 public class SlangWords {
-    private TreeMap<String, List<String>> sw = new TreeMap<String, List<String>>();
-    private TreeMap<Integer, List<String>> swHashCode = new TreeMap<Integer, List<String>>();
+    private HashMap<String, List<String>> sw = new HashMap<String, List<String>>();
     private String File_SlangWord = "slang.txt";
     private String File_SlangWordOrigin = "slangOrigin.txt";
     private String File_SlangWordHistory = "slangHistory.txt";
@@ -34,7 +33,6 @@ public class SlangWords {
                     listDefi.add(defi.trim());
                 }
 
-                swHashCode.put( slAndDefi[0].hashCode(), listDefi);
                 sw.put(slAndDefi[0], listDefi);
             }
             fin.close();
@@ -51,14 +49,13 @@ public class SlangWords {
         }
     }
     public void findSlangWord(String slangWord) {
-        Set<String> keySet = sw.keySet();
-
-        for(String key : keySet) {
-            if (key.toLowerCase().contains(slangWord.toLowerCase())) {
-                for (String defi : sw.get(key)) {
-                    System.out.println("slang:" + key + " defi:" + defi);
-                }
+        if (sw.containsKey(slangWord)) {
+            for (String defi : sw.get(slangWord)) {
+                System.out.println("slang:" + slangWord + " defi:" + defi);
             }
+        }
+        else {
+            System.out.println("Không tồn tại slang word!!");
         }
     }
     public void findDefinition(String defiKeyword) {
@@ -74,9 +71,7 @@ public class SlangWords {
     }
 
     public void addSlangWord(String slangWord, String defi) {
-        int hashSlang = slangWord.hashCode();
-
-        if (swHashCode.containsKey(hashSlang)) {
+        if (sw.containsKey(slangWord)) {
             int choice;
 
             System.out.println("Đã tồn tại slang word!!");
@@ -96,7 +91,8 @@ public class SlangWords {
             List<String> listDefi = new ArrayList<String>();
             listDefi.add(defi);
             sw.put(slangWord, listDefi);
-            swHashCode.put(slangWord.hashCode(), listDefi);
         }
     }
+
+
 }

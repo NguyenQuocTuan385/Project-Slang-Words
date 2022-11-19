@@ -9,8 +9,15 @@ public class Main {
             System.out.println("0. Thoát");
             System.out.println("1. Tìm kiếm theo slang word");
             System.out.println("2. Tìm kiếm theo definition");
-            System.out.println("4. Thêm slang words mới");
-            System.out.print("Nhập lựa chọn của bạn");
+            System.out.println("3. Hiển thị lịch sử slang word đã tìm kiếm");
+            System.out.println("4. Thêm slang word mới");
+            System.out.println("5. Chỉnh sửa một slang word");
+            System.out.println("6. Xóa một slang word");
+            System.out.println("7. Reset danh sách slang words gốc");
+            System.out.println("8. Random 1 slang word");
+            System.out.println("9. Đố vui theo slang word");
+            System.out.println("10. Đố vui theo definition");
+            System.out.print("Nhập lựa chọn của bạn:");
             choice = sc.nextInt();
             sc.nextLine();
 
