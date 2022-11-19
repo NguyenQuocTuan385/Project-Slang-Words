@@ -6,20 +6,32 @@ import java.util.*;
 
 public class SlangWords {
     private TreeMap<String, List<String>> sw = new TreeMap<String, List<String>>();
+    private String File_SlangWord = "slang.txt";
+    private String File_SlangWordOrigin = "slangOrigin.txt";
+    private String File_SlangWordHistory = "slangHistory.txt";
     public SlangWords() {
+        ReadFile(File_SlangWord);
+    }
+
+    public void ReadFile(String inputFile) {
         try {
-            BufferedReader fin = new BufferedReader(new FileReader("slang.txt"));
+            BufferedReader fin = new BufferedReader(new FileReader(inputFile));
             String line = "";
+
             while (true) {
                 List<String> listDefi = new ArrayList<String>();
                 line = fin.readLine();
+
                 if (line == null)
                     break;
+
                 String slAndDefi[] = line.split("`");
                 String[] arrDefi = slAndDefi[1].split("\\|");
+
                 for(String defi : arrDefi) {
                     listDefi.add(defi.trim());
                 }
+
                 sw.put(slAndDefi[0], listDefi);
             }
             fin.close();
