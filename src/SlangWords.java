@@ -10,6 +10,7 @@ public class SlangWords {
     private String File_SlangWord = "slang.txt";
     private String File_SlangWordOrigin = "slangOrigin.txt";
     private String File_SlangWordHistory = "slangHistory.txt";
+    static Scanner sc = new Scanner(System.in);
     public SlangWords() {
         ReadFile(File_SlangWord);
     }
@@ -76,7 +77,20 @@ public class SlangWords {
         int hashSlang = slangWord.hashCode();
 
         if (swHashCode.containsKey(hashSlang)) {
-            System.out.println("Đã tồn ");
+            int choice;
+
+            System.out.println("Đã tồn tại slang word!!");
+            System.out.println("1. Overwrite");
+            System.out.println("2. Duplicate");
+            System.out.print("Nhập lựa chọn của bạn:");
+            choice = sc.nextInt();
+            sc.nextLine();
+            if (choice == 1) {
+                sw.get(slangWord).set(0, defi);
+            }
+            else if(choice == 2) {
+                sw.get(slangWord).add(defi);
+            }
         }
         else {
             List<String> listDefi = new ArrayList<String>();
