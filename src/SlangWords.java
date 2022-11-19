@@ -49,17 +49,15 @@ public class SlangWords {
             }
         }
     }
-
     public void findSlangWord(String slangWord) {
-        int hashSlang = slangWord.hashCode();
+        Set<String> keySet = sw.keySet();
 
-        if (swHashCode.containsKey(hashSlang)) {
-            for (String defi : swHashCode.get(hashSlang)) {
-                    System.out.println("slang:" + slangWord + " defi:" + defi);
+        for(String key : keySet) {
+            if (key.toLowerCase().contains(slangWord.toLowerCase())) {
+                for (String defi : sw.get(key)) {
+                    System.out.println("slang:" + key + " defi:" + defi);
                 }
-        }
-        else {
-            System.out.println("Không có slang word này");
+            }
         }
     }
     public void findDefinition(String defiKeyword) {
@@ -71,6 +69,20 @@ public class SlangWords {
                     System.out.println("slang:" + key + " defi:" + defi);
                 }
             }
+        }
+    }
+
+    public void addSlangWord(String slangWord, String defi) {
+        int hashSlang = slangWord.hashCode();
+
+        if (swHashCode.containsKey(hashSlang)) {
+            System.out.println("Đã tồn ");
+        }
+        else {
+            List<String> listDefi = new ArrayList<String>();
+            listDefi.add(defi);
+            sw.put(slangWord, listDefi);
+            swHashCode.put(slangWord.hashCode(), listDefi);
         }
     }
 }
