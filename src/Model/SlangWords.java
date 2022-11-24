@@ -1,3 +1,5 @@
+package Model;
+
 import java.io.*;
 import java.util.*;
 
@@ -8,6 +10,9 @@ public class SlangWords {
     private final String fileSlangWordHistory = "slangHistory.txt";
     static Scanner sc = new Scanner(System.in);
 
+    public HashMap<String, List<String>> getListSw() {
+        return sw;
+    }
     public SlangWords() {
         readFile(fileSlangWord);
     }
@@ -205,13 +210,14 @@ public class SlangWords {
     public static int randomMinMax(int min, int max) {
         return (int) (Math.random() * (max - min + 1) + min);
     }
+
     public String[] randomSlangWord() {
         int indexRandSw = randomMinMax(0, sw.size() - 1);
         int index = 0;
         Set<String> keySetSw = sw.keySet();
         String[] swAndDefi = new String[2];
-        for(String key : keySetSw) {
-            if(index == indexRandSw) {
+        for (String key : keySetSw) {
+            if (index == indexRandSw) {
                 int indexRandDefi = randomMinMax(0, sw.get(key).size() - 1);
                 swAndDefi[0] = key;
                 swAndDefi[1] = sw.get(key).get(indexRandDefi);
@@ -221,9 +227,9 @@ public class SlangWords {
         }
         return swAndDefi;
     }
+
     public boolean quiz(int option) {
         if (option == 1) {
-            //TreeMap<String, List<String>> quizSwWith4Defi = new TreeMap<>();
             String[] SwAndDefiRand = randomSlangWord();
             Set<String> fourDefiTemp = new HashSet<>();
             int numberDefi = 1;
@@ -241,27 +247,22 @@ public class SlangWords {
             Collections.shuffle(fourDefi);
             System.out.println("Slang word:" + SwAndDefiRand[0]);
 
-            for(int i = 0; i < 4;i++){
-                System.out.println(i+1 + "." + fourDefi.get(i));
+            for (int i = 0; i < 4; i++) {
+                System.out.println(i + 1 + "." + fourDefi.get(i));
             }
 
             System.out.print("Nhập lựa chọn của bạn:");
             int choice = sc.nextInt();
             sc.nextLine();
 
-            if (SwAndDefiRand[1].equals(fourDefi.get(choice-1))) {
+            if (SwAndDefiRand[1].equals(fourDefi.get(choice - 1))) {
                 System.out.println("Chúc mừng bạn đã chọn đáp án đúng");
-                return  true;
-            }
-            else {
+                return true;
+            } else {
                 System.out.println("Thật đáng tiếc bạn đã chọn sai");
-                return  false;
+                return false;
             }
-            //quizSwWith4Defi.put(SwAndDefiRand[0], fourDefi);
-
-
         } else {
-            //TreeMap<String, List<String>> quizDefiWith4Sw = new TreeMap<>();
             String[] SwAndDefiRand = randomSlangWord();
             Set<String> fourSwTemp = new HashSet<>();
             int numberSw = 1;
@@ -280,23 +281,21 @@ public class SlangWords {
 
             System.out.println("Definition:" + SwAndDefiRand[1]);
 
-            for(int i = 0; i < 4;i++){
-                System.out.println(i+1 + "." + fourSw.get(i));
+            for (int i = 0; i < 4; i++) {
+                System.out.println(i + 1 + "." + fourSw.get(i));
             }
 
             System.out.print("Nhập lựa chọn của bạn:");
             int choice = sc.nextInt();
             sc.nextLine();
 
-            if (SwAndDefiRand[0].equals(fourSw.get(choice-1))) {
+            if (SwAndDefiRand[0].equals(fourSw.get(choice - 1))) {
                 System.out.println("Chúc mừng bạn đã chọn đáp án đúng");
-                return  true;
-            }
-            else {
+                return true;
+            } else {
                 System.out.println("Thật đáng tiếc bạn đã chọn sai");
-                return  false;
+                return false;
             }
-            //quizDefiWith4Sw.put(SwAndDefiRand[1], fourSw);
         }
     }
 }
