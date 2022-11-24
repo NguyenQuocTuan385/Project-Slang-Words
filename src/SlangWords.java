@@ -29,11 +29,20 @@ public class SlangWords {
                 String slAndDefi[] = line.split("`");
                 String[] arrDefi = slAndDefi[1].split("\\|");
 
-                for(String defi : arrDefi) {
-                    listDefi.add(defi.trim());
+                if (sw.containsKey(slAndDefi[0])) { //Nếu đã từng tồn tại Slang word trong danh sách
+                    for(String defi : arrDefi) { //Duyệt vòng lặp defi
+                        if (sw.get(slAndDefi[0]).contains(defi.trim()) == false) { //Nếu chưa từng tồn tại defi này trong slang đó
+                            sw.get(slAndDefi[0]).add(defi);
+                        }
+                    }
                 }
+                else {
+                    for(String defi : arrDefi) {
+                        listDefi.add(defi.trim());
+                    }
 
-                sw.put(slAndDefi[0], listDefi);
+                    sw.put(slAndDefi[0], listDefi);
+                }
             }
             fin.close();
         } catch (Exception e) {
