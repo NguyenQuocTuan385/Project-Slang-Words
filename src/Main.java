@@ -45,6 +45,29 @@ public class Main {
                     sw.addSlangWord(slangWord, defi);
                     break;
                 }
+                case 5: {
+                    break;
+                }
+                case 6: {
+                    System.out.println("----------------------------------------");
+                    System.out.print("Nhập slang word bạn muốn xóa:");
+                    String slangWord = sc.nextLine();
+                    sw.deleteSlangWord(slangWord);
+                    break;
+                }
+                case 7: {
+                    sw.resetSlangWord();
+                    sw.ReadFile(sw.getFileSW());
+                    break;
+                }
+                case 8: {
+                    break;
+                }
+                case 9: {
+                    break;
+                }
+                default:
+                    break;
             }
         }while (choice != 0);
     }
