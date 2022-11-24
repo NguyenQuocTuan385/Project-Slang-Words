@@ -221,4 +221,82 @@ public class SlangWords {
         }
         return swAndDefi;
     }
+    public boolean quiz(int option) {
+        if (option == 1) {
+            //TreeMap<String, List<String>> quizSwWith4Defi = new TreeMap<>();
+            String[] SwAndDefiRand = randomSlangWord();
+            Set<String> fourDefiTemp = new HashSet<>();
+            int numberDefi = 1;
+            fourDefiTemp.add(SwAndDefiRand[1]);
+
+            while (numberDefi < 4) {
+                String[] SwAndDefiRandWrongAns = randomSlangWord();
+                if (!SwAndDefiRandWrongAns[0].equals(SwAndDefiRand[0])) {
+                    if (fourDefiTemp.add(SwAndDefiRandWrongAns[1])) {
+                        numberDefi++;
+                    }
+                }
+            }
+            List<String> fourDefi = new ArrayList<>(fourDefiTemp);
+            Collections.shuffle(fourDefi);
+            System.out.println("Slang word:" + SwAndDefiRand[0]);
+
+            for(int i = 0; i < 4;i++){
+                System.out.println(i+1 + "." + fourDefi.get(i));
+            }
+
+            System.out.print("Nhập lựa chọn của bạn:");
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            if (SwAndDefiRand[1].equals(fourDefi.get(choice-1))) {
+                System.out.println("Chúc mừng bạn đã chọn đáp án đúng");
+                return  true;
+            }
+            else {
+                System.out.println("Thật đáng tiếc bạn đã chọn sai");
+                return  false;
+            }
+            //quizSwWith4Defi.put(SwAndDefiRand[0], fourDefi);
+
+
+        } else {
+            //TreeMap<String, List<String>> quizDefiWith4Sw = new TreeMap<>();
+            String[] SwAndDefiRand = randomSlangWord();
+            Set<String> fourSwTemp = new HashSet<>();
+            int numberSw = 1;
+            fourSwTemp.add(SwAndDefiRand[0]);
+
+            while (numberSw < 4) {
+                String[] SwAndDefiRandWrongAns = randomSlangWord();
+                if (!SwAndDefiRandWrongAns[0].equals(SwAndDefiRand[0])) {
+                    if (fourSwTemp.add(SwAndDefiRandWrongAns[0])) {
+                        numberSw++;
+                    }
+                }
+            }
+            List<String> fourSw = new ArrayList<>(fourSwTemp);
+            Collections.shuffle(fourSw);
+
+            System.out.println("Definition:" + SwAndDefiRand[1]);
+
+            for(int i = 0; i < 4;i++){
+                System.out.println(i+1 + "." + fourSw.get(i));
+            }
+
+            System.out.print("Nhập lựa chọn của bạn:");
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            if (SwAndDefiRand[0].equals(fourSw.get(choice-1))) {
+                System.out.println("Chúc mừng bạn đã chọn đáp án đúng");
+                return  true;
+            }
+            else {
+                System.out.println("Thật đáng tiếc bạn đã chọn sai");
+                return  false;
+            }
+            //quizDefiWith4Sw.put(SwAndDefiRand[1], fourSw);
+        }
+    }
 }

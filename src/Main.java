@@ -1,4 +1,7 @@
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
@@ -77,9 +80,11 @@ public class Main {
                     break;
                 }
                 case 9: {
+                    sw.quiz(1);
                     break;
                 }
                 case 10: {
+                    sw.quiz(2);
                     break;
                 }
                 default:
