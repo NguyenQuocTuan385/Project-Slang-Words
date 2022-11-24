@@ -2,19 +2,21 @@ import java.io.*;
 import java.util.*;
 
 public class SlangWords {
-    private HashMap<String, List<String>> sw = new HashMap<String, List<String>>();
-    private String File_SlangWord = "slang.txt";
-    private String File_SlangWordOrigin = "slangOrigin.txt";
-    private String File_SlangWordHistory = "slangHistory.txt";
+    private HashMap<String, List<String>> sw = new HashMap<>();
+    private final String fileSlangWord = "slang.txt";
+    private final String fileSlangWordOrigin = "slangOrigin.txt";
+    private final String fileSlangWordHistory = "slangHistory.txt";
     static Scanner sc = new Scanner(System.in);
+
     public SlangWords() {
-        ReadFile(File_SlangWord);
+        readFile(fileSlangWord);
     }
 
     public String getFileSW() {
-        return File_SlangWord;
+        return fileSlangWord;
     }
-    public void ReadFile(String inputFile) {
+
+    public void readFile(String inputFile) {
         try {
             BufferedReader fin = new BufferedReader(new FileReader(inputFile));
             String line = "";
@@ -30,14 +32,13 @@ public class SlangWords {
                 String[] arrDefi = slAndDefi[1].split("\\|");
 
                 if (sw.containsKey(slAndDefi[0])) { //Nếu đã từng tồn tại Slang word trong danh sách
-                    for(String defi : arrDefi) { //Duyệt vòng lặp defi
-                        if (sw.get(slAndDefi[0]).contains(defi.trim()) == false) { //Nếu chưa từng tồn tại defi này trong slang đó
+                    for (String defi : arrDefi) { //Duyệt vòng lặp defi
+                        if (!sw.get(slAndDefi[0]).contains(defi.trim())) { //Nếu chưa từng tồn tại defi này trong slang đó
                             sw.get(slAndDefi[0]).add(defi);
                         }
                     }
-                }
-                else {
-                    for(String defi : arrDefi) {
+                } else {
+                    for (String defi : arrDefi) {
                         listDefi.add(defi.trim());
                     }
 
@@ -52,22 +53,23 @@ public class SlangWords {
 
     public void resetSlangWord() {
         try {
-            this.ReadFile(File_SlangWordOrigin);
-            this.saveFile(File_SlangWord);
-        }catch (Exception e) {
+            this.readFile(fileSlangWordOrigin);
+            this.saveFile(fileSlangWord);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public void saveFile(String outputFile) {
         try {
             BufferedWriter fout = new BufferedWriter(new FileWriter(outputFile));
             Set<String> keySetSw = this.sw.keySet();
 
-            for(String key: keySetSw) {
+            for (String key : keySetSw) {
                 fout.write(key + "`");
                 fout.write(sw.get(key).get(0));
 
-                for(int j = 1; j < sw.get(key).size(); j++) {
+                for (int j = 1; j < sw.get(key).size(); j++) {
                     fout.write("| " + sw.get(key).get(j));
                 }
                 fout.newLine();
@@ -83,8 +85,7 @@ public class SlangWords {
             for (String defi : sw.get(slangWord)) {
                 System.out.println("slang:" + slangWord + " defi:" + defi);
             }
-        }
-        else {
+        } else {
             System.out.println("Không tồn tại slang trong danh sách!!");
         }
         this.saveHistory(slangWord);
@@ -93,7 +94,7 @@ public class SlangWords {
     public void findDefinition(String defiKeyword) {
         Set<String> keySetSw = sw.keySet();
 
-        for(String key : keySetSw) {
+        for (String key : keySetSw) {
             for (String defi : sw.get(key)) {
                 if (defi.toLowerCase().contains(defiKeyword.toLowerCase())) {
                     System.out.println("slang:" + key + " defi:" + defi);
@@ -104,22 +105,22 @@ public class SlangWords {
 
     public void saveHistory(String slangWord) {
         try {
-            BufferedWriter fout = new BufferedWriter (new FileWriter(File_SlangWordHistory, true));
+            BufferedWriter fout = new BufferedWriter(new FileWriter(fileSlangWordHistory, true));
             fout.write(slangWord);
             fout.newLine();
             fout.close();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void readHistory() {
         try {
-            BufferedReader fin = new BufferedReader (new FileReader(File_SlangWordHistory));
+            BufferedReader fin = new BufferedReader(new FileReader(fileSlangWordHistory));
             String line = "";
             System.out.println("Danh sách các slang word đã tìm kiếm:");
             int index = 1;
-            while(true) {
+            while (true) {
                 line = fin.readLine();
                 if (line == null)
                     break;
@@ -127,10 +128,11 @@ public class SlangWords {
                 index++;
             }
             fin.close();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public void addSlangWord(String slangWord, String defi) {
         if (sw.containsKey(slangWord)) {
             int choice;
@@ -145,18 +147,16 @@ public class SlangWords {
 
             if (choice == 1) {
                 sw.get(slangWord).set(0, defi);
-                this.saveFile(File_SlangWord);
-            }
-            else if(choice == 2) {
+                this.saveFile(fileSlangWord);
+            } else if (choice == 2) {
                 sw.get(slangWord).add(defi);
-                this.saveFile(File_SlangWord);
+                this.saveFile(fileSlangWord);
             }
-        }
-        else {
+        } else {
             List<String> listDefi = new ArrayList<String>();
             listDefi.add(defi);
             sw.put(slangWord, listDefi);
-            this.saveFile(File_SlangWord);
+            this.saveFile(fileSlangWord);
         }
     }
 
@@ -165,8 +165,8 @@ public class SlangWords {
             int choice;
             int index = 1;
             System.out.println("Bạn muốn chỉnh sửa defi nào?");
-            for(String defi : sw.get(slangWord)) {
-                System.out.println(String.valueOf(index) + ". " + defi);
+            for (String defi : sw.get(slangWord)) {
+                System.out.println(index + ". " + defi);
                 index++;
             }
             System.out.print("Nhập lựa chọn của bạn:");
@@ -176,14 +176,14 @@ public class SlangWords {
             System.out.print("Nhập defition bạn muốn sau khi sửa:");
             String defiEdit = sc.nextLine();
 
-            sw.get(slangWord).set(choice-1,defiEdit);
+            sw.get(slangWord).set(choice - 1, defiEdit);
             System.out.println("Chỉnh sửa thành công");
-            this.saveFile(File_SlangWord);
-        }
-        else {
+            this.saveFile(fileSlangWord);
+        } else {
             System.out.println("Không tồn tại slang word trong danh sách để chỉnh sửa!!!");
         }
     }
+
     public void deleteSlangWord(String slangWord) {
         if (sw.containsKey(slangWord)) {
             int choice;
@@ -195,11 +195,30 @@ public class SlangWords {
             sc.nextLine();
             if (choice == 1) {
                 sw.remove(slangWord);
-                this.saveFile(File_SlangWord);
+                this.saveFile(fileSlangWord);
             }
-        }
-        else {
+        } else {
             System.out.println("Không tồn tại slang word trong danh sách để xóa!!!");
         }
+    }
+
+    public static int randomMinMax(int min, int max) {
+        return (int) (Math.random() * (max - min + 1) + min);
+    }
+    public String[] randomSlangWord() {
+        int indexRandSw = randomMinMax(0, sw.size() - 1);
+        int index = 0;
+        Set<String> keySetSw = sw.keySet();
+        String[] swAndDefi = new String[2];
+        for(String key : keySetSw) {
+            if(index == indexRandSw) {
+                int indexRandDefi = randomMinMax(0, sw.get(key).size() - 1);
+                swAndDefi[0] = key;
+                swAndDefi[1] = sw.get(key).get(indexRandDefi);
+                return swAndDefi;
+            }
+            index++;
+        }
+        return swAndDefi;
     }
 }

@@ -66,13 +66,20 @@ public class Main {
                 }
                 case 7: {
                     sw.resetSlangWord();
-                    sw.ReadFile(sw.getFileSW());
+                    sw.readFile(sw.getFileSW());
                     break;
                 }
                 case 8: {
+                    System.out.println("----------------------------------------");
+                    System.out.println("On this day slang word");
+                    String[] swAndDefi = sw.randomSlangWord();
+                    System.out.println("Slang word:" + swAndDefi[0]);
                     break;
                 }
                 case 9: {
+                    break;
+                }
+                case 10: {
                     break;
                 }
                 default:
