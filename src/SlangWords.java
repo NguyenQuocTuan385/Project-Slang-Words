@@ -87,7 +87,9 @@ public class SlangWords {
         else {
             System.out.println("Không tồn tại slang trong danh sách!!");
         }
+        this.saveHistory(slangWord);
     }
+
     public void findDefinition(String defiKeyword) {
         Set<String> keySetSw = sw.keySet();
 
@@ -100,6 +102,35 @@ public class SlangWords {
         }
     }
 
+    public void saveHistory(String slangWord) {
+        try {
+            BufferedWriter fout = new BufferedWriter (new FileWriter(File_SlangWordHistory, true));
+            fout.write(slangWord);
+            fout.newLine();
+            fout.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readHistory() {
+        try {
+            BufferedReader fin = new BufferedReader (new FileReader(File_SlangWordHistory));
+            String line = "";
+            System.out.println("Danh sách các slang word đã tìm kiếm:");
+            int index = 1;
+            while(true) {
+                line = fin.readLine();
+                if (line == null)
+                    break;
+                System.out.println(index + ". " + line);
+                index++;
+            }
+            fin.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void addSlangWord(String slangWord, String defi) {
         if (sw.containsKey(slangWord)) {
             int choice;

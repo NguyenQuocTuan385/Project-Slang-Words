@@ -6,6 +6,7 @@ public class Main {
         SlangWords sw = new SlangWords();
         int choice;
         do {
+            System.out.println("-------------------------------Menu-------------------------------");
             System.out.println("0. Thoát");
             System.out.println("1. Tìm kiếm theo slang word");
             System.out.println("2. Tìm kiếm theo definition");
@@ -34,6 +35,10 @@ public class Main {
                     System.out.print("Nhập definition bạn muốn tìm:");
                     String defi = sc.nextLine();
                     sw.findDefinition(defi);
+                    break;
+                }
+                case 3: {
+                    sw.readHistory();
                     break;
                 }
                 case 4: {
