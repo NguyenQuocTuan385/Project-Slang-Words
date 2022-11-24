@@ -52,13 +52,8 @@ public class SlangWords {
 
     public void resetSlangWord() {
         try {
-            FileInputStream originalFile = new FileInputStream(File_SlangWordOrigin);
-            FileOutputStream resetFile = new FileOutputStream(File_SlangWord);
-
-            int i;
-            while((i = originalFile.read()) != -1) {
-                resetFile.write((char)i);
-            }
+            this.ReadFile(File_SlangWordOrigin);
+            this.saveFile(File_SlangWord);
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,6 +126,31 @@ public class SlangWords {
             listDefi.add(defi);
             sw.put(slangWord, listDefi);
             this.saveFile(File_SlangWord);
+        }
+    }
+
+    public void editSlangWord(String slangWord) {
+        if (sw.containsKey(slangWord)) {
+            int choice;
+            int index = 1;
+            System.out.println("Bạn muốn chỉnh sửa defi nào?");
+            for(String defi : sw.get(slangWord)) {
+                System.out.println(String.valueOf(index) + ". " + defi);
+                index++;
+            }
+            System.out.print("Nhập lựa chọn của bạn:");
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Nhập defition bạn muốn sau khi sửa:");
+            String defiEdit = sc.nextLine();
+
+            sw.get(slangWord).set(choice-1,defiEdit);
+            System.out.println("Chỉnh sửa thành công");
+            this.saveFile(File_SlangWord);
+        }
+        else {
+            System.out.println("Không tồn tại slang word trong danh sách để chỉnh sửa!!!");
         }
     }
     public void deleteSlangWord(String slangWord) {

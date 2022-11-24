@@ -46,6 +46,10 @@ public class Main {
                     break;
                 }
                 case 5: {
+                    System.out.println("----------------------------------------");
+                    System.out.print("Nhập slang word bạn muốn chỉnh sửa:");
+                    String slangWord = sc.nextLine();
+                    sw.editSlangWord(slangWord);
                     break;
                 }
                 case 6: {
