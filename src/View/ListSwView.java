@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
@@ -23,7 +24,10 @@ public class ListSwView extends JFrame implements ActionListener {
     private JButton btnBack;
     private JButton btnAdd;
     private JButton btnDelete;
+    private JButton btnUpdate;
     private JButton btnReset;
+    private JTextField swField;
+    private JTextField defiField;
 
     public ListSwView(SlangWords sw) {
         this.slangWords = sw;
@@ -34,9 +38,11 @@ public class ListSwView extends JFrame implements ActionListener {
         this.setSize(1000,600);
         this.setLocationRelativeTo(null);
 
-        jTextSearch = new JTextField(37);
+        jTextSearch = new JTextField(40);
         btnSearch = new JButton("Tìm kiếm");
         btnSearch.addActionListener(this);
+        btnSearch.setBackground(new Color(63, 114, 175));
+        btnSearch.setForeground(Color.white);
 
         JPanel jPanelTopBot = new JPanel();
         jPanelTopBot.setLayout(new FlowLayout());
@@ -57,9 +63,9 @@ public class ListSwView extends JFrame implements ActionListener {
         dataSw = this.slangWords.getListSw();
 
         header = new JLabel("Danh sách " + dataSw.size() + " slang word khác nhau trong hệ thống", JLabel.CENTER);
-        Font fontHeaderAndFooter = new Font("Arial", Font.BOLD, 18);
+        Font fontHeaderAndFooter = new Font("Arial", Font.BOLD, 24);
         header.setFont(fontHeaderAndFooter);
-        header.setForeground(Color.BLUE);
+        header.setForeground(new Color(63, 114, 175));
 
         JPanel jPanelTop = new JPanel();
         jPanelTop.setLayout(new BorderLayout());
@@ -84,23 +90,38 @@ public class ListSwView extends JFrame implements ActionListener {
         btnBack = new JButton("Quay lại");
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100,50));
+        btnBack.setBackground(new Color(63, 114, 175));
+        btnBack.setForeground(Color.white);
 
         btnAdd = new JButton("Thêm");
         btnAdd.addActionListener(this);
         btnAdd.setPreferredSize(new Dimension(100,50));
+        btnAdd.setBackground(new Color(63, 114, 175));
+        btnAdd.setForeground(Color.white);
 
         btnDelete = new JButton("Xóa");
         btnDelete.addActionListener(this);
         btnDelete.setPreferredSize(new Dimension(100,50));
+        btnDelete.setBackground(new Color(63, 114, 175));
+        btnDelete.setForeground(Color.white);
+
+        btnUpdate = new JButton("Cập nhật");
+        btnUpdate.addActionListener(this);
+        btnUpdate.setPreferredSize(new Dimension(100,50));
+        btnUpdate.setBackground(new Color(63, 114, 175));
+        btnUpdate.setForeground(Color.white);
 
         btnReset= new JButton("Khôi phục");
         btnReset.addActionListener(this);
         btnReset.setPreferredSize(new Dimension(100,50));
+        btnReset.setBackground(new Color(63, 114, 175));
+        btnReset.setForeground(Color.white);
 
         JPanel jPanelBot = new JPanel(new FlowLayout());
         jPanelBot.add(btnBack);
         jPanelBot.add(btnAdd);
         jPanelBot.add(btnDelete);
+        jPanelBot.add(btnUpdate);
         jPanelBot.add(btnReset);
 
         JPanel jPanelBot1 = new JPanel();
@@ -129,6 +150,15 @@ public class ListSwView extends JFrame implements ActionListener {
             }
         }
     }
+//    private void jTableMouseClicked(MouseEvent evt) {
+//        DefaultTableModel tbModel = (DefaultTableModel) jTableSw.getModel();
+//
+//        String sw = tbModel.getValueAt(jTableSw.getSelectedRow(), 1).toString();
+//        String defi = tbModel.getValueAt(jTableSw.getSelectedRow(), 2).toString();
+//
+//        swField.setText(sw);
+//        defiField.setText(defi);
+//    }
     @Override
     public void actionPerformed(ActionEvent e) {
         String strAction = e.getActionCommand();
@@ -163,12 +193,13 @@ public class ListSwView extends JFrame implements ActionListener {
             }
         }
         else if (strAction.equals("Thêm")) {
-            JTextField swField = new JTextField(20);
-            JTextField defiField = new JTextField(20);
+            swField = new JTextField(20);
+            defiField = new JTextField(20);
 
             JPanel addPanelTop = new JPanel(new BorderLayout());
             JLabel headerAddPanel = new JLabel("Vui lòng nhập Slang word và Definition muốn thêm");
-            headerAddPanel.setForeground(Color.BLUE);
+            headerAddPanel.setForeground(new Color(63, 114, 175));
+
             addPanelTop.add(headerAddPanel);
             JPanel addPanelBody = new JPanel(new BorderLayout());
             JPanel swPanelInput = new JPanel(new FlowLayout());
@@ -228,6 +259,7 @@ public class ListSwView extends JFrame implements ActionListener {
 
             JLabel headerDeletePanel = new JLabel("Vui lòng nhập Slang word muốn xóa");
             headerDeletePanel.setForeground(Color.BLUE);
+            headerDeletePanel.setForeground(new Color(63, 114, 175));
 
             JPanel addPanelTop = new JPanel(new BorderLayout());
             addPanelTop.add(headerDeletePanel);
@@ -269,6 +301,56 @@ public class ListSwView extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(this, "Không tồn tại definition muốn xóa!!!"
                                 , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     }
+                }
+            }
+        }
+        else if(strAction.equals("Cập nhật")) {
+            swField = new JTextField(20);
+            defiField = new JTextField(20);
+
+            DefaultTableModel model = (DefaultTableModel) jTableSw.getModel();
+            int selectedRowIndex = jTableSw.getSelectedRow();
+            String sw = model.getValueAt(selectedRowIndex,1).toString();
+            String defi = model.getValueAt(selectedRowIndex,2).toString();
+
+            swField.setText(sw);
+            defiField.setText(defi);
+
+            JPanel updatePanelTop = new JPanel(new BorderLayout());
+            JLabel headerUpdatePanel = new JLabel("Vui lòng nhập Slang word và Definition muốn chỉnh sửa");
+            headerUpdatePanel.setForeground(new Color(63, 114, 175));
+
+            updatePanelTop.add(headerUpdatePanel);
+            JPanel updatePanelBody = new JPanel(new BorderLayout());
+            JPanel swPanelInput = new JPanel(new FlowLayout());
+            JPanel defiPanelInput = new JPanel(new FlowLayout());
+
+            swPanelInput.add(new JLabel("Slang word:"));
+            swPanelInput.add(swField);
+
+            defiPanelInput.add(new JLabel("Definition:"));
+            defiPanelInput.add(defiField);
+
+            updatePanelBody.add(swPanelInput, BorderLayout.PAGE_START);
+            updatePanelBody.add(defiPanelInput, BorderLayout.CENTER);
+
+            JPanel addPanel = new JPanel(new BorderLayout());
+            addPanel.add(updatePanelTop, BorderLayout.PAGE_START);
+            addPanel.add(updatePanelBody, BorderLayout.CENTER);
+
+            int result = JOptionPane.showConfirmDialog(null, addPanel,
+                    "Chỉnh sửa Slang Word", JOptionPane.OK_CANCEL_OPTION);
+            String swInput = swField.getText();
+            String defiInput = defiField.getText();
+
+            if (result == JOptionPane.OK_OPTION) {
+                if(swInput.equals("") || defiInput.equals("")) {
+                    JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word hoặc defi!!!", "Cảnh báo"
+                            , JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    model.setValueAt(swInput, selectedRowIndex, 1);
+                    model.setValueAt(defiInput, selectedRowIndex, 2);
                 }
             }
         }
