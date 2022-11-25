@@ -78,7 +78,7 @@ public class Main {
 //                    System.out.println("----------------------------------------");
 //                    System.out.println("On this day slang word");
 //                    String[] swAndDefi = sw.randomSlangWord();
-//                    System.out.println("Slang word:" + swAndDefi[0]);
+//                    System.out.   println("Slang word:" + swAndDefi[0]);
 //                    break;
 //                }
 //                case 9: {

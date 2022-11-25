@@ -60,7 +60,8 @@ public class SlangWords {
 
     public void resetSlangWord() {
         try {
-            this.saveFile(fileSlangWord, this.readFile(fileSlangWordOrigin), false);
+            this.sw = this.readFile(fileSlangWordOrigin);
+            this.saveFile(fileSlangWord, this.sw, false);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -23,6 +23,7 @@ public class ListSwView extends JFrame implements ActionListener {
     private JButton btnBack;
     private JButton btnAdd;
     private JButton btnDelete;
+    private JButton btnReset;
 
     public ListSwView(SlangWords sw) {
         this.slangWords = sw;
@@ -33,11 +34,6 @@ public class ListSwView extends JFrame implements ActionListener {
         this.setSize(1000,600);
         this.setLocationRelativeTo(null);
 
-        header = new JLabel("Danh sách các slang word", JLabel.CENTER);
-        Font fontHeaderAndFooter = new Font("Arial", Font.BOLD, 18);
-        header.setFont(fontHeaderAndFooter);
-        header.setForeground(Color.BLUE);
-
         jTextSearch = new JTextField(37);
         btnSearch = new JButton("Tìm kiếm");
         btnSearch.addActionListener(this);
@@ -46,12 +42,6 @@ public class ListSwView extends JFrame implements ActionListener {
         jPanelTopBot.setLayout(new FlowLayout());
         jPanelTopBot.add(jTextSearch);
         jPanelTopBot.add(btnSearch);
-
-
-        JPanel jPanelTop = new JPanel();
-        jPanelTop.setLayout(new BorderLayout());
-        jPanelTop.add(header, BorderLayout.PAGE_START);
-        jPanelTop.add(jPanelTopBot, BorderLayout.CENTER);
 
         dtmSw = new DefaultTableModel() {
             @Override
@@ -66,6 +56,16 @@ public class ListSwView extends JFrame implements ActionListener {
 
         dataSw = this.slangWords.getListSw();
 
+        header = new JLabel("Danh sách " + dataSw.size() + " slang word khác nhau trong hệ thống", JLabel.CENTER);
+        Font fontHeaderAndFooter = new Font("Arial", Font.BOLD, 18);
+        header.setFont(fontHeaderAndFooter);
+        header.setForeground(Color.BLUE);
+
+        JPanel jPanelTop = new JPanel();
+        jPanelTop.setLayout(new BorderLayout());
+        jPanelTop.add(header, BorderLayout.PAGE_START);
+        jPanelTop.add(jPanelTopBot, BorderLayout.CENTER);
+
         loadDataSw(dataSw);
 
         jTableSw = new JTable(dtmSw);
@@ -73,7 +73,6 @@ public class ListSwView extends JFrame implements ActionListener {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         jTableSw.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         jTableSw.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        jTableSw.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
         jTableSw.getColumnModel().getColumn(0).setPreferredWidth(50);
         jTableSw.getColumnModel().getColumn(1).setPreferredWidth(100);
         jTableSw.getColumnModel().getColumn(2).setPreferredWidth(300);
@@ -94,10 +93,15 @@ public class ListSwView extends JFrame implements ActionListener {
         btnDelete.addActionListener(this);
         btnDelete.setPreferredSize(new Dimension(100,50));
 
+        btnReset= new JButton("Khôi phục");
+        btnReset.addActionListener(this);
+        btnReset.setPreferredSize(new Dimension(100,50));
+
         JPanel jPanelBot = new JPanel(new FlowLayout());
         jPanelBot.add(btnBack);
         jPanelBot.add(btnAdd);
         jPanelBot.add(btnDelete);
+        jPanelBot.add(btnReset);
 
         JPanel jPanelBot1 = new JPanel();
         jPanelBot1.add(jPanelBot);
@@ -213,6 +217,8 @@ public class ListSwView extends JFrame implements ActionListener {
                         this.slangWords.addSlangWord(swInput, defiInput, 3);
                         dataSw = slangWords.getListSw();
                         loadDataSw(dataSw);
+                        JOptionPane.showMessageDialog(this, "Thêm thành công slang word vào hệ thống"
+                                , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
@@ -251,17 +257,31 @@ public class ListSwView extends JFrame implements ActionListener {
                     if(dataSw.containsKey(swInput)) {
                         Object[] options = {"Ok", "Cancel"};
                         int click = JOptionPane.showOptionDialog(null, "Bạn có thật sự muốn xóa Slang word này không?"
-                                , "Xác nhận xóa Slang  word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                                , "Xác nhận xóa Slang word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
                         if (click == JOptionPane.YES_OPTION) {
                             this.slangWords.deleteSlangWord(swInput);
                             dataSw = slangWords.getListSw();
                             loadDataSw(dataSw);
+                            JOptionPane.showMessageDialog(this, "Xóa slang word thành công"
+                                    , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
                         JOptionPane.showMessageDialog(this, "Không tồn tại definition muốn xóa!!!"
                                 , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
+            }
+        }
+        else if(strAction.equals("Khôi phục")) {
+            Object[] options = {"Ok", "Cancel"};
+            int click = JOptionPane.showOptionDialog(null, "Bạn có thật sự muốn khôi phục danh sách Slang word không?"
+                    , "Xác nhận khôi phục Slang word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            if (click == JOptionPane.YES_OPTION) {
+                this.slangWords.resetSlangWord();
+                dataSw = slangWords.getListSw();
+                loadDataSw(dataSw);
+                JOptionPane.showMessageDialog(this, "Khôi phục danh sách thành công!!!"
+                        , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }

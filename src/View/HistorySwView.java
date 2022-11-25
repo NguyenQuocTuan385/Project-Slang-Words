@@ -54,7 +54,9 @@ public class HistorySwView extends JFrame implements ActionListener {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         jTableSw.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         jTableSw.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        jTableSw.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        jTableSw.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTableSw.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jTableSw.getColumnModel().getColumn(2).setPreferredWidth(300);
 
         JScrollPane sc = new JScrollPane(jTableSw, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         JPanel jPanelBody = new JPanel();

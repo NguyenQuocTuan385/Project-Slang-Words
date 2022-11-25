@@ -12,10 +12,7 @@ public class MenuView extends JFrame implements ActionListener {
     private JLabel headerSlangWord;
     private JButton btnListSw;
     private JButton btnShowHistory;
-    private JButton btnAddSw;
     private JButton btnEditSw;
-    private JButton btnDeleteSw;
-    private JButton btnResetListSw;
     private JButton btnRandomSW;
     private JButton btnQuizAboutSW;
     private JButton btnQuizAboutDefi;
@@ -44,17 +41,8 @@ public class MenuView extends JFrame implements ActionListener {
         btnShowHistory = new JButton("Lịch sử các slang word đã tìm kiếm");
         btnShowHistory.addActionListener(this);
 
-        btnAddSw = new JButton("Thêm slang word");
-        btnAddSw.addActionListener(this);
-
         btnEditSw = new JButton("Chỉnh sửa slang word");
         btnEditSw.addActionListener(this);
-
-        btnDeleteSw = new JButton("Xóa slang word");
-        btnDeleteSw.addActionListener(this);
-
-        btnResetListSw = new JButton("Khôi phục danh sách slang word");
-        btnResetListSw.addActionListener(this);
 
         btnRandomSW = new JButton("Random slang word hôm nay");
         btnRandomSW.addActionListener(this);
@@ -69,10 +57,7 @@ public class MenuView extends JFrame implements ActionListener {
         jPanelBody.setLayout(new GridLayout(3,5, 10, 10));
         jPanelBody.add(btnListSw);
         jPanelBody.add(btnShowHistory);
-        jPanelBody.add(btnAddSw);
         jPanelBody.add(btnEditSw);
-        jPanelBody.add(btnDeleteSw);
-        jPanelBody.add(btnResetListSw);
         jPanelBody.add(btnRandomSW);
         jPanelBody.add(btnQuizAboutSW);
         jPanelBody.add(btnQuizAboutDefi);
@@ -100,13 +85,7 @@ public class MenuView extends JFrame implements ActionListener {
         } else if (strAction.equals("Lịch sử các slang word đã tìm kiếm")) {
             this.dispose();
             new HistorySwView(this.sw);
-        } else if (strAction.equals("Thêm slang word")) {
-            this.dispose();
         } else if (strAction.equals("Chỉnh sửa slang word")) {
-            this.dispose();
-        } else if (strAction.equals("Xóa slang word")) {
-            this.dispose();
-        } else if (strAction.equals("Khôi phục danh sách slang word")) {
             this.dispose();
         } else if (strAction.equals("Random slang word hôm nay")) {
             this.dispose();
