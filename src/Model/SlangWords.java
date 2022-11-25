@@ -20,6 +20,9 @@ public class SlangWords {
     public String getFileSW() {
         return fileSlangWord;
     }
+    public void setListSw(HashMap<String, List<String>> sw) {
+        this.sw = sw;
+    }
 
     public HashMap<String, List<String>> readFile(String inputFile) {
         HashMap<String, List<String>> swAndDefi = new HashMap<>();
@@ -143,30 +146,6 @@ public class SlangWords {
             listDefi.add(defi);
             sw.put(slangWord, listDefi);
             this.saveFile(fileSlangWord, this.sw, false);
-        }
-    }
-
-    public void editSlangWord(String slangWord) {
-        if (sw.containsKey(slangWord)) {
-            int choice;
-            int index = 1;
-            System.out.println("Bạn muốn chỉnh sửa defi nào?");
-            for (String defi : sw.get(slangWord)) {
-                System.out.println(index + ". " + defi);
-                index++;
-            }
-            System.out.print("Nhập lựa chọn của bạn:");
-            choice = sc.nextInt();
-            sc.nextLine();
-
-            System.out.print("Nhập defition bạn muốn sau khi sửa:");
-            String defiEdit = sc.nextLine();
-
-            sw.get(slangWord).set(choice - 1, defiEdit);
-            System.out.println("Chỉnh sửa thành công");
-            this.saveFile(fileSlangWord, this.sw, false);
-        } else {
-            System.out.println("Không tồn tại slang word trong danh sách để chỉnh sửa!!!");
         }
     }
 

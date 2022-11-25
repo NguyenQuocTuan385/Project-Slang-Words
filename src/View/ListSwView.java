@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
@@ -305,52 +304,100 @@ public class ListSwView extends JFrame implements ActionListener {
             }
         }
         else if(strAction.equals("Cập nhật")) {
-            swField = new JTextField(20);
-            defiField = new JTextField(20);
+            if (!jTableSw.getSelectionModel().isSelectionEmpty()) {
+                swField = new JTextField(20);
+                defiField = new JTextField(20);
 
-            DefaultTableModel model = (DefaultTableModel) jTableSw.getModel();
-            int selectedRowIndex = jTableSw.getSelectedRow();
-            String sw = model.getValueAt(selectedRowIndex,1).toString();
-            String defi = model.getValueAt(selectedRowIndex,2).toString();
+                DefaultTableModel model = (DefaultTableModel) jTableSw.getModel();
 
-            swField.setText(sw);
-            defiField.setText(defi);
+                int selectedRowIndex = jTableSw.getSelectedRow();
+                String sw = model.getValueAt(selectedRowIndex,1).toString();
+                String defi = model.getValueAt(selectedRowIndex,2).toString();
 
-            JPanel updatePanelTop = new JPanel(new BorderLayout());
-            JLabel headerUpdatePanel = new JLabel("Vui lòng nhập Slang word và Definition muốn chỉnh sửa");
-            headerUpdatePanel.setForeground(new Color(63, 114, 175));
+                swField.setText(sw);
+                defiField.setText(defi);
 
-            updatePanelTop.add(headerUpdatePanel);
-            JPanel updatePanelBody = new JPanel(new BorderLayout());
-            JPanel swPanelInput = new JPanel(new FlowLayout());
-            JPanel defiPanelInput = new JPanel(new FlowLayout());
+                JPanel updatePanelTop = new JPanel(new BorderLayout());
+                JLabel headerUpdatePanel = new JLabel("Vui lòng nhập Slang word và Definition muốn chỉnh sửa");
+                headerUpdatePanel.setForeground(new Color(63, 114, 175));
 
-            swPanelInput.add(new JLabel("Slang word:"));
-            swPanelInput.add(swField);
+                updatePanelTop.add(headerUpdatePanel);
+                JPanel updatePanelBody = new JPanel(new BorderLayout());
+                JPanel swPanelInput = new JPanel(new FlowLayout());
+                JPanel defiPanelInput = new JPanel(new FlowLayout());
 
-            defiPanelInput.add(new JLabel("Definition:"));
-            defiPanelInput.add(defiField);
+                swPanelInput.add(new JLabel("Slang word:"));
+                swPanelInput.add(swField);
 
-            updatePanelBody.add(swPanelInput, BorderLayout.PAGE_START);
-            updatePanelBody.add(defiPanelInput, BorderLayout.CENTER);
+                defiPanelInput.add(new JLabel("Definition:"));
+                defiPanelInput.add(defiField);
 
-            JPanel addPanel = new JPanel(new BorderLayout());
-            addPanel.add(updatePanelTop, BorderLayout.PAGE_START);
-            addPanel.add(updatePanelBody, BorderLayout.CENTER);
+                updatePanelBody.add(swPanelInput, BorderLayout.PAGE_START);
+                updatePanelBody.add(defiPanelInput, BorderLayout.CENTER);
 
-            int result = JOptionPane.showConfirmDialog(null, addPanel,
-                    "Chỉnh sửa Slang Word", JOptionPane.OK_CANCEL_OPTION);
-            String swInput = swField.getText();
-            String defiInput = defiField.getText();
+                JPanel addPanel = new JPanel(new BorderLayout());
+                addPanel.add(updatePanelTop, BorderLayout.PAGE_START);
+                addPanel.add(updatePanelBody, BorderLayout.CENTER);
 
-            if (result == JOptionPane.OK_OPTION) {
-                if(swInput.equals("") || defiInput.equals("")) {
-                    JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word hoặc defi!!!", "Cảnh báo"
-                            , JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    model.setValueAt(swInput, selectedRowIndex, 1);
-                    model.setValueAt(defiInput, selectedRowIndex, 2);
+                int result = JOptionPane.showConfirmDialog(null, addPanel,
+                        "Chỉnh sửa Slang Word", JOptionPane.OK_CANCEL_OPTION);
+                String swInput = swField.getText();
+                String defiInput = defiField.getText();
+
+                if (result == JOptionPane.OK_OPTION) {
+                    if(swInput.equals("") || defiInput.equals("")) {
+                        JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word hoặc defi!!!", "Cảnh báo"
+                                , JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        if (swInput.equals(sw)) {  //Không sửa tên slang word
+                            int index = 0;
+                            for(String defiCheck : dataSw.get(sw)) { //Duyệt vòng lặp để sửa defi đó
+                                if  (defiCheck.equals(defi)) {
+                                    dataSw.get(sw).set(index, defiInput);
+                                    break;
+                                }
+                                index++;
+                            }
+                        }
+                        else { //Có sửa tên slang word
+                            if (dataSw.containsKey(swInput)) { //Kiểm tra xem có slang word nào trùng vs tên đã sửa chưa
+                                if (dataSw.get(sw).size() == 1) //Trong slang word bị sửa chỉ có một definition
+                                {
+                                    dataSw.remove(sw); //Xóa slang word đó
+                                }
+                                else { //TRong slang word bị sửa có nhiều hơn một definition
+                                    for (String defiCheck : dataSw.get(sw)) { //Duyệt vòng lặp để sửa defi đó
+                                        if (defiCheck.equals(defi)) {
+                                            dataSw.get(sw).remove(defi);
+                                            break;
+                                        }
+                                    }
+                                }
+                                dataSw.get(swInput).add(defiInput);
+                            }
+                            else { //Chưa có slang word nào trùng tên muốn sửa
+                                if (dataSw.get(sw).size() == 1) //Trong slang word bị sửa chỉ có một definition
+                                {
+                                    dataSw.remove(sw); //Xóa slang word đó
+                                }
+                                else { //TRong slang word bị sửa có nhiều hơn một definition
+                                    for (String defiCheck : dataSw.get(sw)) { //Duyệt vòng lặp để sửa defi đó
+                                        if (defiCheck.equals(defi)) {
+                                            dataSw.get(sw).remove(defi);
+                                            break;
+                                        }
+                                    }
+                                }
+                                dataSw.put(swInput, Arrays.asList(defiInput));
+                            }
+                        }
+                        this.slangWords.setListSw(dataSw);
+                        this.slangWords.saveFile(this.slangWords.getFileSW(), dataSw, false);
+                        loadDataSw(dataSw);
+                        JOptionPane.showMessageDialog(this, "Cập nhật slang word thành công"
+                                , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         }

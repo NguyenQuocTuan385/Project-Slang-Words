@@ -49,12 +49,6 @@ public class MenuView extends JFrame implements ActionListener {
         btnShowHistory.setForeground(Color.white);
         btnShowHistory.setFont(fontBody);
 
-        btnEditSw = new JButton("Chỉnh sửa slang word");
-        btnEditSw.addActionListener(this);
-        btnEditSw.setBackground(new Color(63, 114, 175));
-        btnEditSw.setForeground(Color.white);
-        btnEditSw.setFont(fontBody);
-
         btnRandomSW = new JButton("Random slang word hôm nay");
         btnRandomSW.addActionListener(this);
         btnRandomSW.setBackground(new Color(63, 114, 175));
@@ -77,7 +71,6 @@ public class MenuView extends JFrame implements ActionListener {
         jPanelBody.setLayout(new GridLayout(3,5, 10, 10));
         jPanelBody.add(btnListSw);
         jPanelBody.add(btnShowHistory);
-        jPanelBody.add(btnEditSw);
         jPanelBody.add(btnRandomSW);
         jPanelBody.add(btnQuizAboutSW);
         jPanelBody.add(btnQuizAboutDefi);
@@ -105,8 +98,6 @@ public class MenuView extends JFrame implements ActionListener {
         } else if (strAction.equals("Lịch sử các slang word đã tìm kiếm")) {
             this.dispose();
             new HistorySwView(this.sw);
-        } else if (strAction.equals("Chỉnh sửa slang word")) {
-            this.dispose();
         } else if (strAction.equals("Random slang word hôm nay")) {
             this.dispose();
             new RandomSlangWordTodayView(this.sw);
