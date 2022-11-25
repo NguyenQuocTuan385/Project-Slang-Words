@@ -11,6 +11,7 @@ import java.util.*;
 import java.util.List;
 
 public class QuizForSlangView extends JFrame implements ActionListener {
+    private int option;
     private SlangWords slangWords;
     private JLabel header;
     private JLabel swQuestionLabel;
@@ -24,8 +25,9 @@ public class QuizForSlangView extends JFrame implements ActionListener {
     private String defiCorrect;
     private int numberClick = 1;
 
-    public QuizForSlangView(SlangWords sw) {
+    public QuizForSlangView(SlangWords sw, int option) {
         this.slangWords = sw;
+        this.option = option;
 
         JFrame.setDefaultLookAndFeelDecorated(true);
         this.setTitle("Quiz for slang word");
@@ -34,14 +36,21 @@ public class QuizForSlangView extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(249, 247, 247));
 
-        header = new JLabel("Hãy chọn đáp án đúng với slang word sau đây", JLabel.CENTER);
+        if (this.option == 1) {
+            header = new JLabel("Hãy chọn đáp án đúng với slang word sau đây", JLabel.CENTER);
+        }
+        else {
+            header = new JLabel("Hãy chọn đáp án đúng với definition sau đây", JLabel.CENTER);
+        }
+
         Font fontHeaderAndFooter = new Font("Arial", Font.BOLD, 24);
         Font fontBody = new Font("Arial", Font.BOLD, 20);
         header.setFont(fontHeaderAndFooter);
-        header.setForeground(new Color(63, 114, 175));
+        header.setForeground(new Color(17, 45, 78));
 
         swQuestionLabel = new JLabel("", JLabel.CENTER);
         swQuestionLabel.setFont(fontHeaderAndFooter);
+        swQuestionLabel.setForeground(new Color(63, 114, 175));
 
         JPanel jPanelTop = new JPanel(new BorderLayout());
         jPanelTop.add(header, BorderLayout.PAGE_START);
@@ -73,7 +82,7 @@ public class QuizForSlangView extends JFrame implements ActionListener {
         btnD.setFont(fontBody);
         btnD.setActionCommand("D");
 
-        this.loadDataQuiz();
+        this.loadDataQuiz(this.option);
 
         jPanelBody.add(btnA);
         jPanelBody.add(btnB);
@@ -107,8 +116,15 @@ public class QuizForSlangView extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public void loadDataQuiz() {
-        HashMap<String, Integer> swAndDefiQuiz = slangWords.quiz(1);
+    public void loadDataQuiz(int option) {
+        HashMap<String, Integer> swAndDefiQuiz = new HashMap<>();
+        if (option == 1) {
+            swAndDefiQuiz = slangWords.quiz(1);
+        }
+        else {
+            swAndDefiQuiz = slangWords.quiz(2);
+        }
+
         List<String> defiAnswer = new ArrayList<>();
         Set<String> swAndDefi = swAndDefiQuiz.keySet();
         for(String swDefi : swAndDefi) {
@@ -140,7 +156,7 @@ public class QuizForSlangView extends JFrame implements ActionListener {
             new MenuView();
         }
         else if (strAction.equals("Reset")) {
-            this.loadDataQuiz();
+            this.loadDataQuiz(this.option);
             numberClick = 1;
             btnA.setBackground(new Color(219, 226, 239));
             btnB.setBackground(new Color(219, 226, 239));

@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ListSwView extends JFrame implements ActionListener {
     private SlangWords slangWords;
+    private int sluongSw;
 
     private JTextField jTextSearch;
     private JButton btnSearch;
@@ -60,8 +61,9 @@ public class ListSwView extends JFrame implements ActionListener {
         dtmSw.addColumn("Definition");
 
         dataSw = this.slangWords.getListSw();
+        sluongSw = dataSw.size();
 
-        header = new JLabel("Danh sách " + dataSw.size() + " slang word khác nhau trong hệ thống", JLabel.CENTER);
+        header = new JLabel("Danh sách " + sluongSw + " slang word khác nhau trong hệ thống", JLabel.CENTER);
         Font fontHeaderAndFooter = new Font("Arial", Font.BOLD, 24);
         header.setFont(fontHeaderAndFooter);
         header.setForeground(new Color(63, 114, 175));
@@ -148,16 +150,10 @@ public class ListSwView extends JFrame implements ActionListener {
                 index++;
             }
         }
+        sluongSw = dataSw.size();
+        header.setText("Danh sách " + sluongSw + " slang word khác nhau trong hệ thống");
     }
-//    private void jTableMouseClicked(MouseEvent evt) {
-//        DefaultTableModel tbModel = (DefaultTableModel) jTableSw.getModel();
-//
-//        String sw = tbModel.getValueAt(jTableSw.getSelectedRow(), 1).toString();
-//        String defi = tbModel.getValueAt(jTableSw.getSelectedRow(), 2).toString();
-//
-//        swField.setText(sw);
-//        defiField.setText(defi);
-//    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String strAction = e.getActionCommand();
