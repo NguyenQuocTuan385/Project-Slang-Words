@@ -4509,6 +4509,7 @@ SLOL`Seriously Laughing Out Loud
 JATQ`Just Answer The Question
 UARK`You Already Know
 CANTO`Cantonese
+SLNA`Test| Song Lam Nghe An
 UB3R`Uber| very
 JAVA`Programming language| Coffee
 FRONT`Pretend| falsely represent

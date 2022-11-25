@@ -129,26 +129,15 @@ public class SlangWords {
         return this.readFile(fileSlangWordHistory);
     }
 
-    public void addSlangWord(String slangWord, String defi) {
-        if (sw.containsKey(slangWord)) {
-            int choice;
-
-            System.out.println("Đã tồn tại slang word!!");
-            System.out.println("1. Overwrite");
-            System.out.println("2. Duplicate");
-            System.out.print("Nhập lựa chọn của bạn:");
-
-            choice = sc.nextInt();
-            sc.nextLine();
-
-            if (choice == 1) {
-                sw.get(slangWord).set(0, defi);
-                this.saveFile(fileSlangWord, this.sw, false);
-            } else if (choice == 2) {
-                sw.get(slangWord).add(defi);
-                this.saveFile(fileSlangWord, this.sw, false);
-            }
-        } else {
+    public void addSlangWord(String slangWord, String defi, int choice) {
+        if (choice == 1) {
+            sw.get(slangWord).set(0, defi);
+            this.saveFile(fileSlangWord, this.sw, false);
+        } else if (choice == 2) {
+            sw.get(slangWord).add(defi);
+            this.saveFile(fileSlangWord, this.sw, false);
+        }
+         else if (choice == 3) {
             List<String> listDefi = new ArrayList<String>();
             listDefi.add(defi);
             sw.put(slangWord, listDefi);

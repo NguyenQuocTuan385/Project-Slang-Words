@@ -21,6 +21,8 @@ public class ListSwView extends JFrame implements ActionListener {
     private JTable jTableSw;
     private JLabel header;
     private JButton btnBack;
+    private JButton btnAdd;
+    private JButton btnDelete;
 
     public ListSwView(SlangWords sw) {
         this.slangWords = sw;
@@ -84,13 +86,26 @@ public class ListSwView extends JFrame implements ActionListener {
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100,50));
 
-        JPanel jPanelBot = new JPanel();
+        btnAdd = new JButton("Thêm");
+        btnAdd.addActionListener(this);
+        btnAdd.setPreferredSize(new Dimension(100,50));
+
+        btnDelete = new JButton("Xóa");
+        btnDelete.addActionListener(this);
+        btnDelete.setPreferredSize(new Dimension(100,50));
+
+        JPanel jPanelBot = new JPanel(new FlowLayout());
         jPanelBot.add(btnBack);
+        jPanelBot.add(btnAdd);
+        jPanelBot.add(btnDelete);
+
+        JPanel jPanelBot1 = new JPanel();
+        jPanelBot1.add(jPanelBot);
 
         this.setLayout(new BorderLayout());
         this.add(jPanelTop, BorderLayout.PAGE_START);
         this.add(jPanelBody, BorderLayout.CENTER);
-        this.add(jPanelBot, BorderLayout.PAGE_END);
+        this.add(jPanelBot1, BorderLayout.PAGE_END);
 
         this.setVisible(true);
     }
@@ -142,6 +157,66 @@ public class ListSwView extends JFrame implements ActionListener {
                     }
                 }
             }
+        }
+        else if (strAction.equals("Thêm")) {
+            JTextField swField = new JTextField(20);
+            JTextField defiField = new JTextField(20);
+
+            JPanel addPanelTop = new JPanel(new BorderLayout());
+            addPanelTop.add(new JLabel("Lưu ý: nhập | giữa các definition nếu muốn thêm nhiều definition"));
+            JPanel addPanelBody = new JPanel(new BorderLayout());
+            JPanel swPanelInput = new JPanel(new FlowLayout());
+            JPanel defiPanelInput = new JPanel(new FlowLayout());
+
+            swPanelInput.add(new JLabel("Slang word:"));
+            swPanelInput.add(swField);
+
+            defiPanelInput.add(new JLabel("Definition:"));
+            defiPanelInput.add(defiField);
+
+            addPanelBody.add(swPanelInput, BorderLayout.PAGE_START);
+            addPanelBody.add(defiPanelInput, BorderLayout.CENTER);
+
+            JPanel addPanel = new JPanel(new BorderLayout());
+            addPanel.add(addPanelTop, BorderLayout.PAGE_START);
+            addPanel.add(addPanelBody, BorderLayout.CENTER);
+
+            int result = JOptionPane.showConfirmDialog(null, addPanel,
+                    "Vui lòng nhập Slang word và Definition", JOptionPane.OK_CANCEL_OPTION);
+            String swInput = swField.getText();
+            String defiInput = defiField.getText();
+
+            if (result == JOptionPane.OK_OPTION) {
+                if(swInput.equals("") || defiInput.equals("")) {
+                    JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word hoặc defi!!!", "Cảnh báo"
+                            , JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    if(dataSw.containsKey(swInput)) {
+                        Object[] options = {"Overwrite", "Duplicate"};
+                        int click = JOptionPane.showOptionDialog(null, "Lựa chọn ghi đè"
+                                , "Đã tồn tại slang word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                        if (click == JOptionPane.YES_OPTION) {
+                            this.slangWords.addSlangWord(swInput, defiInput, 1);
+                            dataSw = slangWords.getListSw();
+                            loadDataSw(dataSw);
+                        }
+                        else if (click == JOptionPane.NO_OPTION) {
+                            this.slangWords.addSlangWord(swInput, defiInput, 2);
+                            dataSw = slangWords.getListSw();
+                            loadDataSw(dataSw);
+                        }
+                    }
+                    else {
+                        this.slangWords.addSlangWord(swInput, defiInput, 3);
+                        dataSw = slangWords.getListSw();
+                        loadDataSw(dataSw);
+                    }
+                }
+            }
+        }
+        else if (strAction.equals("Xóa")) {
+
         }
     }
 }
