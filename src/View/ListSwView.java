@@ -163,7 +163,9 @@ public class ListSwView extends JFrame implements ActionListener {
             JTextField defiField = new JTextField(20);
 
             JPanel addPanelTop = new JPanel(new BorderLayout());
-            addPanelTop.add(new JLabel("Lưu ý: nhập | giữa các definition nếu muốn thêm nhiều definition"));
+            JLabel headerAddPanel = new JLabel("Vui lòng nhập Slang word và Definition muốn thêm");
+            headerAddPanel.setForeground(Color.BLUE);
+            addPanelTop.add(headerAddPanel);
             JPanel addPanelBody = new JPanel(new BorderLayout());
             JPanel swPanelInput = new JPanel(new FlowLayout());
             JPanel defiPanelInput = new JPanel(new FlowLayout());
@@ -182,7 +184,7 @@ public class ListSwView extends JFrame implements ActionListener {
             addPanel.add(addPanelBody, BorderLayout.CENTER);
 
             int result = JOptionPane.showConfirmDialog(null, addPanel,
-                    "Vui lòng nhập Slang word và Definition", JOptionPane.OK_CANCEL_OPTION);
+                    "Thêm Slang Word", JOptionPane.OK_CANCEL_OPTION);
             String swInput = swField.getText();
             String defiInput = defiField.getText();
 
@@ -216,7 +218,51 @@ public class ListSwView extends JFrame implements ActionListener {
             }
         }
         else if (strAction.equals("Xóa")) {
+            JTextField swField = new JTextField(20);
 
+            JLabel headerDeletePanel = new JLabel("Vui lòng nhập Slang word muốn xóa");
+            headerDeletePanel.setForeground(Color.BLUE);
+
+            JPanel addPanelTop = new JPanel(new BorderLayout());
+            addPanelTop.add(headerDeletePanel);
+
+            JPanel addPanelBody = new JPanel(new BorderLayout());
+            JPanel swPanelInput = new JPanel(new FlowLayout());
+
+            swPanelInput.add(new JLabel("Slang word:"));
+            swPanelInput.add(swField);
+
+            addPanelBody.add(swPanelInput, BorderLayout.CENTER);
+
+            JPanel addPanel = new JPanel(new BorderLayout());
+            addPanel.add(addPanelTop, BorderLayout.PAGE_START);
+            addPanel.add(addPanelBody, BorderLayout.CENTER);
+
+            int result = JOptionPane.showConfirmDialog(null, addPanel,
+                    "Xóa Slang Word", JOptionPane.OK_CANCEL_OPTION);
+
+            String swInput = swField.getText();
+            if (result == JOptionPane.OK_OPTION) {
+                if (swInput.equals("")) {
+                    JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word!!!", "Cảnh báo"
+                            , JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    if(dataSw.containsKey(swInput)) {
+                        Object[] options = {"Ok", "Cancel"};
+                        int click = JOptionPane.showOptionDialog(null, "Bạn có thật sự muốn xóa Slang word này không?"
+                                , "Xác nhận xóa Slang  word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                        if (click == JOptionPane.YES_OPTION) {
+                            this.slangWords.deleteSlangWord(swInput);
+                            dataSw = slangWords.getListSw();
+                            loadDataSw(dataSw);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Không tồn tại definition muốn xóa!!!"
+                                , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
         }
     }
 }

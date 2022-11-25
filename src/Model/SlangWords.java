@@ -170,21 +170,9 @@ public class SlangWords {
     }
 
     public void deleteSlangWord(String slangWord) {
-        if (sw.containsKey(slangWord)) {
-            int choice;
-            System.out.println("Bạn chắc chắn muốn xóa slang word này ra khỏi danh sách chứ ?");
-            System.out.println("1. Có");
-            System.out.println("2. Không");
-            System.out.print("Nhập lựa chọn của bạn:");
-            choice = sc.nextInt();
-            sc.nextLine();
-            if (choice == 1) {
-                sw.remove(slangWord);
-                this.saveFile(fileSlangWord, this.sw, false);
-            }
-        } else {
-            System.out.println("Không tồn tại slang word trong danh sách để xóa!!!");
-        }
+        sw.remove(slangWord);
+        this.saveFile(fileSlangWord, this.sw, false);
+
     }
 
     public static int randomMinMax(int min, int max) {
