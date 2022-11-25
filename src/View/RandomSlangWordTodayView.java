@@ -17,7 +17,7 @@ public class RandomSlangWordTodayView extends JFrame implements ActionListener {
     private JLabel swLabelOutput;
     private JLabel defiLabelOutput;
     private String[] swRandom;
-    private JButton btnRandom;
+    private JButton btnReset;
 
     public RandomSlangWordTodayView(SlangWords sw) {
         this.slangWords = sw;
@@ -34,7 +34,7 @@ public class RandomSlangWordTodayView extends JFrame implements ActionListener {
         Font fontBody = new Font("Arial", Font.BOLD, 18);
         Font fontBodyOutput = new Font("Arial", Font.PLAIN, 18);
         header.setFont(fontHeaderAndFooter);
-        header.setForeground(new Color(63, 114, 175));
+        header.setForeground(new Color(17, 45, 78));
 
         JPanel jPanelTop = new JPanel();
         jPanelTop.add(header);
@@ -68,21 +68,23 @@ public class RandomSlangWordTodayView extends JFrame implements ActionListener {
         jPanelBody.add(swPanelOutput, BorderLayout.PAGE_START);
         jPanelBody.add(defiPanelOutput, BorderLayout.CENTER);
 
-        btnBack = new JButton("Quay lại");
+        ImageIcon backImg = new ImageIcon("Go-back-icon.png");
+        btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100,50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
-        btnRandom = new JButton("Random");
-        btnRandom.addActionListener(this);
-        btnRandom.setPreferredSize(new Dimension(100,50));
-        btnRandom.setBackground(new Color(63, 114, 175));
-        btnRandom.setForeground(Color.white);
+        ImageIcon resetImg = new ImageIcon("Restore-Window-icon.png");
+        btnReset= new JButton("Reset", resetImg);
+        btnReset.addActionListener(this);
+        btnReset.setPreferredSize(new Dimension(100,50));
+        btnReset.setBackground(new Color(63, 114, 175));
+        btnReset.setForeground(Color.white);
 
         JPanel jPanelBot = new JPanel(new FlowLayout());
         jPanelBot.add(btnBack);
-        jPanelBot.add(btnRandom);
+        jPanelBot.add(btnReset);
 
         JPanel jPanelBot1 = new JPanel();
         jPanelBot1.add(jPanelBot);
@@ -103,7 +105,7 @@ public class RandomSlangWordTodayView extends JFrame implements ActionListener {
             this.dispose();
             new MenuView();
         }
-        else if(strAction.equals("Random")) {
+        else if(strAction.equals("Reset")) {
             swRandom = this.slangWords.randomSlangWord();
             swLabelOutput.setText(swRandom[0]);
             defiLabelOutput.setText(swRandom[1]);

@@ -39,7 +39,9 @@ public class ListSwView extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
 
         jTextSearch = new JTextField(40);
-        btnSearch = new JButton("Tìm kiếm");
+        ImageIcon searchImg = new ImageIcon("Zoom-icon.png");
+
+        btnSearch = new JButton("Tìm kiếm", searchImg);
         btnSearch.addActionListener(this);
         btnSearch.setBackground(new Color(63, 114, 175));
         btnSearch.setForeground(Color.white);
@@ -66,7 +68,7 @@ public class ListSwView extends JFrame implements ActionListener {
         header = new JLabel("Danh sách " + sluongSw + " slang word khác nhau trong hệ thống", JLabel.CENTER);
         Font fontHeaderAndFooter = new Font("Arial", Font.BOLD, 24);
         header.setFont(fontHeaderAndFooter);
-        header.setForeground(new Color(63, 114, 175));
+        header.setForeground(new Color(17, 45, 78));
 
         JPanel jPanelTop = new JPanel();
         jPanelTop.setLayout(new BorderLayout());
@@ -88,33 +90,38 @@ public class ListSwView extends JFrame implements ActionListener {
         JPanel jPanelBody = new JPanel();
         jPanelBody.add(sc);
 
-        btnBack = new JButton("Quay lại");
+        ImageIcon backImg = new ImageIcon("Go-back-icon.png");
+        btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100,50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
-        btnAdd = new JButton("Thêm");
+        ImageIcon addImg = new ImageIcon("add-1-icon.png");
+        btnAdd = new JButton("Thêm", addImg);
         btnAdd.addActionListener(this);
         btnAdd.setPreferredSize(new Dimension(100,50));
         btnAdd.setBackground(new Color(63, 114, 175));
         btnAdd.setForeground(Color.white);
 
-        btnDelete = new JButton("Xóa");
+        ImageIcon deleteImg = new ImageIcon("Button-Close-icon.png");
+        btnDelete = new JButton("Xóa", deleteImg);
         btnDelete.addActionListener(this);
         btnDelete.setPreferredSize(new Dimension(100,50));
         btnDelete.setBackground(new Color(63, 114, 175));
         btnDelete.setForeground(Color.white);
 
-        btnUpdate = new JButton("Cập nhật");
+        ImageIcon updateImg = new ImageIcon("Actions-document-edit-icon.png");
+        btnUpdate = new JButton("Cập nhật", updateImg);
         btnUpdate.addActionListener(this);
-        btnUpdate.setPreferredSize(new Dimension(100,50));
+        btnUpdate.setPreferredSize(new Dimension(130,50));
         btnUpdate.setBackground(new Color(63, 114, 175));
         btnUpdate.setForeground(Color.white);
 
-        btnReset= new JButton("Khôi phục");
+        ImageIcon resetImg = new ImageIcon("Restore-Window-icon.png");
+        btnReset= new JButton("Khôi phục", resetImg);
         btnReset.addActionListener(this);
-        btnReset.setPreferredSize(new Dimension(100,50));
+        btnReset.setPreferredSize(new Dimension(130,50));
         btnReset.setBackground(new Color(63, 114, 175));
         btnReset.setForeground(Color.white);
 

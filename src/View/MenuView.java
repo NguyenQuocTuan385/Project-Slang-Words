@@ -32,43 +32,46 @@ public class MenuView extends JFrame implements ActionListener {
         Font fontHeaderAndFooter = new Font("Arial", Font.BOLD, 24);
         Font fontBody = new Font("Arial", Font.BOLD, 20);
         headerSlangWord.setFont(fontHeaderAndFooter);
-        headerSlangWord.setForeground(new Color(63, 114, 175));
+        headerSlangWord.setForeground(new Color(17, 45, 78));
 
         JPanel jPanelTop = new JPanel();
         jPanelTop.add(headerSlangWord);
 
-        btnListSw = new JButton("Danh sách các slang word");
+        ImageIcon listImg = new ImageIcon("list-icon.png");
+        btnListSw = new JButton("Danh sách các slang word",listImg);
         btnListSw.addActionListener(this);
         btnListSw.setBackground(new Color(63, 114, 175));
         btnListSw.setForeground(Color.white);
         btnListSw.setFont(fontBody);
 
-        btnShowHistory = new JButton("Lịch sử các slang word đã tìm kiếm");
+        ImageIcon historyImg = new ImageIcon("history-icon.png");
+        btnShowHistory = new JButton("Lịch sử các slang word đã tìm kiếm", historyImg);
         btnShowHistory.addActionListener(this);
         btnShowHistory.setBackground(new Color(63, 114, 175));
         btnShowHistory.setForeground(Color.white);
         btnShowHistory.setFont(fontBody);
 
-        btnRandomSW = new JButton("Random slang word hôm nay");
+        ImageIcon quizImg = new ImageIcon("quiz-icon.png");
+        btnRandomSW = new JButton("Random slang word hôm nay", quizImg);
         btnRandomSW.addActionListener(this);
         btnRandomSW.setBackground(new Color(63, 114, 175));
         btnRandomSW.setForeground(Color.white);
         btnRandomSW.setFont(fontBody);
 
-        btnQuizAboutSW = new JButton("Quiz về Slang Word");
+        btnQuizAboutSW = new JButton("Quiz về Slang Word", quizImg);
         btnQuizAboutSW.addActionListener(this);
         btnQuizAboutSW.setBackground(new Color(63, 114, 175));
         btnQuizAboutSW.setForeground(Color.white);
         btnQuizAboutSW.setFont(fontBody);
 
-        btnQuizAboutDefi = new JButton("Quiz về Definition");
+        btnQuizAboutDefi = new JButton("Quiz về Definition", quizImg);
         btnQuizAboutDefi.addActionListener(this);
         btnQuizAboutDefi.setBackground(new Color(63, 114, 175));
         btnQuizAboutDefi.setForeground(Color.white);
         btnQuizAboutDefi.setFont(fontBody);
 
         JPanel jPanelBody = new JPanel();
-        jPanelBody.setLayout(new GridLayout(3,5, 10, 10));
+        jPanelBody.setLayout(new GridLayout(3,5, 20, 20));
         jPanelBody.add(btnListSw);
         jPanelBody.add(btnShowHistory);
         jPanelBody.add(btnRandomSW);
@@ -77,14 +80,16 @@ public class MenuView extends JFrame implements ActionListener {
 
         footerSlangWord = new JLabel("20127659 - Nguyễn Quốc Tuấn");
         footerSlangWord.setFont(fontHeaderAndFooter);
-        footerSlangWord.setForeground(new Color(63, 114, 175));
+        footerSlangWord.setForeground(new Color(17, 45, 78));
 
         JPanel jPanelBot = new JPanel();
         jPanelBot.add(footerSlangWord);
 
         this.setLayout(new BorderLayout());
         this.add(jPanelTop, BorderLayout.PAGE_START);
+        this.add(new JPanel(), BorderLayout.LINE_START);
         this.add(jPanelBody, BorderLayout.CENTER);
+        this.add(new JPanel(), BorderLayout.LINE_END);
         this.add(jPanelBot, BorderLayout.PAGE_END);
 
         this.setVisible(true);

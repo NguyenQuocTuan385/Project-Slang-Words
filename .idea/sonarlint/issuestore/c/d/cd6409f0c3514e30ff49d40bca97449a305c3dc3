@@ -1,0 +1,52 @@
+
+o
+java:S2293""YReplace the type specification in this constructor call with the diamond operator ("<>").(Îî©§
+p
+java:S2293‘"YReplace the type specification in this constructor call with the diamond operator ("<>").(Îî©§
+K
+java:S1066Á"/Merge this if statement with the enclosing one.(¤¶ü™şÿÿÿÿ
+K
+java:S1066Ò"/Merge this if statement with the enclosing one.(‘¨ãøÿÿÿÿ
+ˆ
+java:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(îÚ¥ùÿÿÿÿ
+z
+java:S1319"_The type of "sw" should be an interface such as "Map" rather than the implementation "HashMap".(ù¯„¨ûÿÿÿÿ
+ˆ
+java:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(‡ÁÒ†øÿÿÿÿ
+
+java:S1319I"fThe type of "swAndDefi" should be an interface such as "Map" rather than the implementation "HashMap".(÷È­üøÿÿÿÿ
+ˆ
+java:S1319]"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(ã¹ªÀûÿÿÿÿ
+ƒ
+java:S1319k"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(˜úÑÍ
+}
+java:S1319€"fThe type of "swAndDefi" should be an interface such as "Map" rather than the implementation "HashMap".(ñãŞ³
+‰
+java:S1319„"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(˜îåÚûÿÿÿÿ
+‰
+java:S1319³"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(Şî¢úıÿÿÿÿ
+l	java:S117µ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾İÿ“øÿÿÿÿ
+l	java:S117¾"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğËİúÿÿÿÿ
+l	java:S117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğËİúÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(á–Ì“
+g
+java:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(°º¨üıÿÿÿÿ
+b
+java:S2095K"LUse try-with-resources or close this "BufferedWriter" in a "finally" clause.( İ‘£
+<
+java:S1170"!Make this final field static too.(Î–€Œøÿÿÿÿ
+<
+java:S1170	"!Make this final field static too.(†ÓÄ’ûÿÿÿÿ
+6
+java:S1170
+"!Make this final field static too.(™ıú 
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(‡ÁÒ†øÿÿÿÿ
+@
+java:S1197("*Move the array designators [] to the type.(Ÿ¯õ’
+=
+java:S1125y"'Remove the unnecessary boolean literal.(«¸ş•
+@
+java:S2140Ÿ")Use "java.util.Random.nextInt()" instead.(Ğ¹øŒ
+n
+java:S3776³"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(Şî¢úıÿÿÿÿ

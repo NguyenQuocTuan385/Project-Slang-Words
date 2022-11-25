@@ -31,7 +31,7 @@ public class HistorySwView extends JFrame implements ActionListener {
         header = new JLabel("Lịch sử slang word đã tìm kiếm", JLabel.CENTER);
         Font fontHeaderAndFooter = new Font("Arial", Font.BOLD, 18);
         header.setFont(fontHeaderAndFooter);
-        header.setForeground(new Color(63, 114, 175));
+        header.setForeground(new Color(17, 45, 78));
 
         JPanel jPanelTop = new JPanel();
         jPanelTop.add(header);
@@ -62,7 +62,8 @@ public class HistorySwView extends JFrame implements ActionListener {
         JPanel jPanelBody = new JPanel();
         jPanelBody.add(sc);
 
-        btnBack = new JButton("Quay lại");
+        ImageIcon backImg = new ImageIcon("Go-back-icon.png");
+        btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100,50));
         btnBack.setBackground(new Color(63, 114, 175));
