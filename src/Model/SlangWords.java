@@ -176,74 +176,46 @@ public class SlangWords {
         return swAndDefi;
     }
 
-    public boolean quiz(int option) {
-        if (option == 1) {
-            String[] SwAndDefiRand = randomSlangWord();
-            Set<String> fourDefiTemp = new HashSet<>();
-            int numberDefi = 1;
-            fourDefiTemp.add(SwAndDefiRand[1]);
+    public HashMap<String, Integer> quiz(int option) {
+        HashMap<String, Integer> swAndDefiQuiz = new HashMap<>();
+        String[] SwAndDefiRand = randomSlangWord();
 
-            while (numberDefi < 4) {
+        if (option == 1) {
+            Set<String> threeDefiTemp = new HashSet<>();
+            int numberDefi = 0;
+            swAndDefiQuiz.put(SwAndDefiRand[0],2); //2 là slang word
+            swAndDefiQuiz.put(SwAndDefiRand[1],1); //1 là definition đúng
+
+            while (numberDefi < 3) {
                 String[] SwAndDefiRandWrongAns = randomSlangWord();
+
                 if (!SwAndDefiRandWrongAns[0].equals(SwAndDefiRand[0])) {
-                    if (fourDefiTemp.add(SwAndDefiRandWrongAns[1])) {
+                    if (threeDefiTemp.add(SwAndDefiRandWrongAns[1])) {
                         numberDefi++;
                     }
                 }
             }
-            List<String> fourDefi = new ArrayList<>(fourDefiTemp);
-            Collections.shuffle(fourDefi);
-            System.out.println("Slang word:" + SwAndDefiRand[0]);
-
-            for (int i = 0; i < 4; i++) {
-                System.out.println(i + 1 + "." + fourDefi.get(i));
-            }
-
-            System.out.print("Nhập lựa chọn của bạn:");
-            int choice = sc.nextInt();
-            sc.nextLine();
-
-            if (SwAndDefiRand[1].equals(fourDefi.get(choice - 1))) {
-                System.out.println("Chúc mừng bạn đã chọn đáp án đúng");
-                return true;
-            } else {
-                System.out.println("Thật đáng tiếc bạn đã chọn sai");
-                return false;
+            for(String defi : threeDefiTemp) {
+                swAndDefiQuiz.put(defi, 0); //0 có nghĩa l definition sai
             }
         } else {
-            String[] SwAndDefiRand = randomSlangWord();
-            Set<String> fourSwTemp = new HashSet<>();
-            int numberSw = 1;
-            fourSwTemp.add(SwAndDefiRand[0]);
+            Set<String> threeSwTemp = new HashSet<>();
+            int numberSw = 0;
+            swAndDefiQuiz.put(SwAndDefiRand[1],2); //2 là defintion
+            swAndDefiQuiz.put(SwAndDefiRand[0],1); //1 là sw đúng
 
-            while (numberSw < 4) {
+            while (numberSw < 3) {
                 String[] SwAndDefiRandWrongAns = randomSlangWord();
                 if (!SwAndDefiRandWrongAns[0].equals(SwAndDefiRand[0])) {
-                    if (fourSwTemp.add(SwAndDefiRandWrongAns[0])) {
+                    if (threeSwTemp.add(SwAndDefiRandWrongAns[0])) {
                         numberSw++;
                     }
                 }
             }
-            List<String> fourSw = new ArrayList<>(fourSwTemp);
-            Collections.shuffle(fourSw);
-
-            System.out.println("Definition:" + SwAndDefiRand[1]);
-
-            for (int i = 0; i < 4; i++) {
-                System.out.println(i + 1 + "." + fourSw.get(i));
-            }
-
-            System.out.print("Nhập lựa chọn của bạn:");
-            int choice = sc.nextInt();
-            sc.nextLine();
-
-            if (SwAndDefiRand[0].equals(fourSw.get(choice - 1))) {
-                System.out.println("Chúc mừng bạn đã chọn đáp án đúng");
-                return true;
-            } else {
-                System.out.println("Thật đáng tiếc bạn đã chọn sai");
-                return false;
+            for(String swWrong : threeSwTemp) {
+                swAndDefiQuiz.put(swWrong, 0); //0 có nghĩa là sw sai
             }
         }
+        return swAndDefiQuiz;
     }
 }

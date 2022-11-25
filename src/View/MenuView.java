@@ -103,6 +103,7 @@ public class MenuView extends JFrame implements ActionListener {
             new RandomSlangWordTodayView(this.sw);
         } else if (strAction.equals("Quiz về Slang Word")) {
             this.dispose();
+            new QuizForSlangView(this.sw);
         } else if (strAction.equals("Quiz về Definition")) {
             this.dispose();
         }
