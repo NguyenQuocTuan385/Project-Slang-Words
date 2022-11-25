@@ -14,14 +14,15 @@ public class SlangWords {
         return sw;
     }
     public SlangWords() {
-        readFile(fileSlangWord);
+        this.sw = readFile(fileSlangWord);
     }
 
     public String getFileSW() {
         return fileSlangWord;
     }
 
-    public void readFile(String inputFile) {
+    public HashMap<String, List<String>> readFile(String inputFile) {
+        HashMap<String, List<String>> swAndDefi = new HashMap<>();
         try {
             BufferedReader fin = new BufferedReader(new FileReader(inputFile));
             String line = "";
@@ -36,10 +37,10 @@ public class SlangWords {
                 String slAndDefi[] = line.split("`");
                 String[] arrDefi = slAndDefi[1].split("\\|");
 
-                if (sw.containsKey(slAndDefi[0])) { //Nếu đã từng tồn tại Slang word trong danh sách
+                if (swAndDefi.containsKey(slAndDefi[0])) { //Nếu đã từng tồn tại Slang word trong danh sách
                     for (String defi : arrDefi) { //Duyệt vòng lặp defi
-                        if (!sw.get(slAndDefi[0]).contains(defi.trim())) { //Nếu chưa từng tồn tại defi này trong slang đó
-                            sw.get(slAndDefi[0]).add(defi);
+                        if (!swAndDefi.get(slAndDefi[0]).contains(defi.trim())) { //Nếu chưa từng tồn tại defi này trong slang đó
+                            swAndDefi.get(slAndDefi[0]).add(defi);
                         }
                     }
                 } else {
@@ -47,35 +48,35 @@ public class SlangWords {
                         listDefi.add(defi.trim());
                     }
 
-                    sw.put(slAndDefi[0], listDefi);
+                    swAndDefi.put(slAndDefi[0], listDefi);
                 }
             }
             fin.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return swAndDefi;
     }
 
     public void resetSlangWord() {
         try {
-            this.readFile(fileSlangWordOrigin);
-            this.saveFile(fileSlangWord);
+            this.saveFile(fileSlangWord, this.readFile(fileSlangWordOrigin), false);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void saveFile(String outputFile) {
+    public void saveFile(String outputFile, HashMap<String, List<String>> swAndDefi, boolean append) {
         try {
-            BufferedWriter fout = new BufferedWriter(new FileWriter(outputFile));
-            Set<String> keySetSw = this.sw.keySet();
+            BufferedWriter fout = new BufferedWriter(new FileWriter(outputFile, append));
+            Set<String> keySetSw = swAndDefi.keySet();
 
             for (String key : keySetSw) {
                 fout.write(key + "`");
-                fout.write(sw.get(key).get(0));
+                fout.write(swAndDefi.get(key).get(0));
 
-                for (int j = 1; j < sw.get(key).size(); j++) {
-                    fout.write("| " + sw.get(key).get(j));
+                for (int j = 1; j < swAndDefi.get(key).size(); j++) {
+                    fout.write("| " + swAndDefi.get(key).get(j));
                 }
                 fout.newLine();
             }
@@ -85,57 +86,47 @@ public class SlangWords {
         }
     }
 
-    public void findSlangWord(String slangWord) {
+    public HashMap<String, List<String>> findSlangWord(String slangWord) {
+        HashMap<String, List<String>> swAndDefi = new HashMap<>();
+
         if (sw.containsKey(slangWord)) {
+            List<String> arrDefi = new ArrayList<>();
             for (String defi : sw.get(slangWord)) {
-                System.out.println("slang:" + slangWord + " defi:" + defi);
+                arrDefi.add(defi);
             }
-        } else {
-            System.out.println("Không tồn tại slang trong danh sách!!");
+            swAndDefi.put(slangWord, arrDefi);
+            this.saveHistory(swAndDefi);
         }
-        this.saveHistory(slangWord);
+        return swAndDefi;
     }
 
-    public void findDefinition(String defiKeyword) {
+    public HashMap<String, List<String>> findDefinition(String defiKeyword) {
+        HashMap<String, List<String>> swAndDefi = new HashMap<>();
         Set<String> keySetSw = sw.keySet();
+        boolean flag = false;
 
         for (String key : keySetSw) {
+            flag = false;
+            List<String> arrDefi = new ArrayList<>();
             for (String defi : sw.get(key)) {
                 if (defi.toLowerCase().contains(defiKeyword.toLowerCase())) {
-                    System.out.println("slang:" + key + " defi:" + defi);
+                    arrDefi.add(defi);
+                    flag = true;
                 }
             }
-        }
-    }
-
-    public void saveHistory(String slangWord) {
-        try {
-            BufferedWriter fout = new BufferedWriter(new FileWriter(fileSlangWordHistory, true));
-            fout.write(slangWord);
-            fout.newLine();
-            fout.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void readHistory() {
-        try {
-            BufferedReader fin = new BufferedReader(new FileReader(fileSlangWordHistory));
-            String line = "";
-            System.out.println("Danh sách các slang word đã tìm kiếm:");
-            int index = 1;
-            while (true) {
-                line = fin.readLine();
-                if (line == null)
-                    break;
-                System.out.println(index + ". " + line);
-                index++;
+            if (flag == true) {
+                swAndDefi.put(key, arrDefi);
             }
-            fin.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        return swAndDefi;
+    }
+
+    public void saveHistory(HashMap<String, List<String>> swAndDefi) {
+        this.saveFile(fileSlangWordHistory, swAndDefi, true);
+    }
+
+    public HashMap<String, List<String>> readHistory() {
+        return this.readFile(fileSlangWordHistory);
     }
 
     public void addSlangWord(String slangWord, String defi) {
@@ -152,16 +143,16 @@ public class SlangWords {
 
             if (choice == 1) {
                 sw.get(slangWord).set(0, defi);
-                this.saveFile(fileSlangWord);
+                this.saveFile(fileSlangWord, this.sw, false);
             } else if (choice == 2) {
                 sw.get(slangWord).add(defi);
-                this.saveFile(fileSlangWord);
+                this.saveFile(fileSlangWord, this.sw, false);
             }
         } else {
             List<String> listDefi = new ArrayList<String>();
             listDefi.add(defi);
             sw.put(slangWord, listDefi);
-            this.saveFile(fileSlangWord);
+            this.saveFile(fileSlangWord, this.sw, false);
         }
     }
 
@@ -183,7 +174,7 @@ public class SlangWords {
 
             sw.get(slangWord).set(choice - 1, defiEdit);
             System.out.println("Chỉnh sửa thành công");
-            this.saveFile(fileSlangWord);
+            this.saveFile(fileSlangWord, this.sw, false);
         } else {
             System.out.println("Không tồn tại slang word trong danh sách để chỉnh sửa!!!");
         }
@@ -200,7 +191,7 @@ public class SlangWords {
             sc.nextLine();
             if (choice == 1) {
                 sw.remove(slangWord);
-                this.saveFile(fileSlangWord);
+                this.saveFile(fileSlangWord, this.sw, false);
             }
         } else {
             System.out.println("Không tồn tại slang word trong danh sách để xóa!!!");
