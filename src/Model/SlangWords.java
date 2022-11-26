@@ -1,5 +1,6 @@
 package Model;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -149,10 +150,48 @@ public class SlangWords {
         }
     }
 
-    public void deleteSlangWord(String slangWord) {
-        sw.remove(slangWord);
+    public void deleteSlangWord(String slangWord, String defi, int option) {
+        if(option == 1) { //Xóa lun slang word đó
+            sw.remove(slangWord);
+        }
+        else {
+            if (sw.get(slangWord).size() == 1) //Trong slang word bị sửa chỉ có một definition
+            {
+                sw.remove(slangWord); //Xóa slang word đó
+            }
+            else { //TRong slang word bị sửa có nhiều hơn một definition
+                for (String defiCheck : sw.get(slangWord)) { //Duyệt vòng lặp để sửa defi đó
+                    if (defiCheck.equals(defi)) {
+                        sw.get(slangWord).remove(defi);
+                        break;
+                    }
+                }
+            }
+        }
         this.saveFile(fileSlangWord, this.sw, false);
+    }
 
+    public void editSlangWord(String slangWordOld, String defiOld, String slangWordNew, String defiNew) {
+        if (slangWordNew.equals(slangWordOld)) {  //Không sửa tên slang word
+            int index = 0;
+            for(String defiCheck : sw.get(slangWordOld)) { //Duyệt vòng lặp để sửa defi đó
+                if  (defiCheck.equals(defiOld)) {
+                    sw.get(slangWordOld).set(index, defiNew);
+                    break;
+                }
+                index++;
+            }
+        }
+        else { //Có sửa tên slang word
+            this.deleteSlangWord(slangWordOld, defiOld, 2);
+            if (sw.containsKey(slangWordNew)) { //Kiểm tra xem có slang word nào trùng vs tên đã sửa chưa
+                sw.get(slangWordNew).add(defiNew);
+            }
+            else { //Chưa có slang word nào trùng tên muốn sửa
+                sw.put(slangWordNew, Arrays.asList(defiNew));
+            }
+        }
+        this.saveFile(fileSlangWord, this.sw, false);
     }
 
     public static int randomMinMax(int min, int max) {

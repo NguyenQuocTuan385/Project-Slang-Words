@@ -257,51 +257,68 @@ public class ListSwView extends JFrame implements ActionListener {
             }
         }
         else if (strAction.equals("Xóa")) {
-            JTextField swField = new JTextField(20);
+            if (!jTableSw.getSelectionModel().isSelectionEmpty()) { //Đang lựa chọn row trong table
+                DefaultTableModel model = (DefaultTableModel) jTableSw.getModel();
 
-            JLabel headerDeletePanel = new JLabel("Vui lòng nhập Slang word muốn xóa");
-            headerDeletePanel.setForeground(Color.BLUE);
-            headerDeletePanel.setForeground(new Color(63, 114, 175));
+                int selectedRowIndex = jTableSw.getSelectedRow();
+                String sw = model.getValueAt(selectedRowIndex, 1).toString();
+                String defi = model.getValueAt(selectedRowIndex, 2).toString();
 
-            JPanel addPanelTop = new JPanel(new BorderLayout());
-            addPanelTop.add(headerDeletePanel);
-
-            JPanel addPanelBody = new JPanel(new BorderLayout());
-            JPanel swPanelInput = new JPanel(new FlowLayout());
-
-            swPanelInput.add(new JLabel("Slang word:"));
-            swPanelInput.add(swField);
-
-            addPanelBody.add(swPanelInput, BorderLayout.CENTER);
-
-            JPanel addPanel = new JPanel(new BorderLayout());
-            addPanel.add(addPanelTop, BorderLayout.PAGE_START);
-            addPanel.add(addPanelBody, BorderLayout.CENTER);
-
-            int result = JOptionPane.showConfirmDialog(null, addPanel,
-                    "Xóa Slang Word", JOptionPane.OK_CANCEL_OPTION);
-
-            String swInput = swField.getText();
-            if (result == JOptionPane.OK_OPTION) {
-                if (swInput.equals("")) {
-                    JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word!!!", "Cảnh báo"
-                            , JOptionPane.ERROR_MESSAGE);
+                Object[] options = {"Ok", "Cancel"};
+                int click = JOptionPane.showOptionDialog(null, "Bạn có thật sự muốn xóa Slang word này không?"
+                        , "Xác nhận xóa Slang word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                if (click == JOptionPane.YES_OPTION) {
+                    slangWords.deleteSlangWord(sw, defi, 2);
+                    loadDataSw(dataSw);
                 }
-                else {
-                    if(dataSw.containsKey(swInput)) {
-                        Object[] options = {"Ok", "Cancel"};
-                        int click = JOptionPane.showOptionDialog(null, "Bạn có thật sự muốn xóa Slang word này không?"
-                                , "Xác nhận xóa Slang word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-                        if (click == JOptionPane.YES_OPTION) {
-                            this.slangWords.deleteSlangWord(swInput);
-                            dataSw = slangWords.getListSw();
-                            loadDataSw(dataSw);
-                            JOptionPane.showMessageDialog(this, "Xóa slang word thành công"
-                                    , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else { //Đang không lựa chọn row trong table
+                JTextField swField = new JTextField(20);
+
+                JLabel headerDeletePanel = new JLabel("Vui lòng nhập Slang word muốn xóa");
+                headerDeletePanel.setForeground(Color.BLUE);
+                headerDeletePanel.setForeground(new Color(63, 114, 175));
+
+                JPanel addPanelTop = new JPanel(new BorderLayout());
+                addPanelTop.add(headerDeletePanel);
+
+                JPanel addPanelBody = new JPanel(new BorderLayout());
+                JPanel swPanelInput = new JPanel(new FlowLayout());
+
+                swPanelInput.add(new JLabel("Slang word:"));
+                swPanelInput.add(swField);
+
+                addPanelBody.add(swPanelInput, BorderLayout.CENTER);
+
+                JPanel addPanel = new JPanel(new BorderLayout());
+                addPanel.add(addPanelTop, BorderLayout.PAGE_START);
+                addPanel.add(addPanelBody, BorderLayout.CENTER);
+
+                int result = JOptionPane.showConfirmDialog(null, addPanel,
+                        "Xóa Slang Word", JOptionPane.OK_CANCEL_OPTION);
+
+                String swInput = swField.getText();
+                if (result == JOptionPane.OK_OPTION) {
+                    if (swInput.equals("")) {
+                        JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word!!!", "Cảnh báo"
+                                , JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        if(dataSw.containsKey(swInput)) {
+                            Object[] options = {"Ok", "Cancel"};
+                            int click = JOptionPane.showOptionDialog(null, "Bạn có thật sự muốn xóa Slang word này không?"
+                                    , "Xác nhận xóa Slang word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+                            if (click == JOptionPane.YES_OPTION) {
+                                this.slangWords.deleteSlangWord(swInput, "", 1);
+                                dataSw = slangWords.getListSw();
+                                loadDataSw(dataSw);
+                                JOptionPane.showMessageDialog(this, "Xóa slang word thành công"
+                                        , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Không tồn tại definition muốn xóa!!!"
+                                    , "Thông báo", JOptionPane.ERROR_MESSAGE);
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Không tồn tại definition muốn xóa!!!"
-                                , "Thông báo", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -353,50 +370,7 @@ public class ListSwView extends JFrame implements ActionListener {
                                 , JOptionPane.ERROR_MESSAGE);
                     }
                     else {
-                        if (swInput.equals(sw)) {  //Không sửa tên slang word
-                            int index = 0;
-                            for(String defiCheck : dataSw.get(sw)) { //Duyệt vòng lặp để sửa defi đó
-                                if  (defiCheck.equals(defi)) {
-                                    dataSw.get(sw).set(index, defiInput);
-                                    break;
-                                }
-                                index++;
-                            }
-                        }
-                        else { //Có sửa tên slang word
-                            if (dataSw.containsKey(swInput)) { //Kiểm tra xem có slang word nào trùng vs tên đã sửa chưa
-                                if (dataSw.get(sw).size() == 1) //Trong slang word bị sửa chỉ có một definition
-                                {
-                                    dataSw.remove(sw); //Xóa slang word đó
-                                }
-                                else { //TRong slang word bị sửa có nhiều hơn một definition
-                                    for (String defiCheck : dataSw.get(sw)) { //Duyệt vòng lặp để sửa defi đó
-                                        if (defiCheck.equals(defi)) {
-                                            dataSw.get(sw).remove(defi);
-                                            break;
-                                        }
-                                    }
-                                }
-                                dataSw.get(swInput).add(defiInput);
-                            }
-                            else { //Chưa có slang word nào trùng tên muốn sửa
-                                if (dataSw.get(sw).size() == 1) //Trong slang word bị sửa chỉ có một definition
-                                {
-                                    dataSw.remove(sw); //Xóa slang word đó
-                                }
-                                else { //TRong slang word bị sửa có nhiều hơn một definition
-                                    for (String defiCheck : dataSw.get(sw)) { //Duyệt vòng lặp để sửa defi đó
-                                        if (defiCheck.equals(defi)) {
-                                            dataSw.get(sw).remove(defi);
-                                            break;
-                                        }
-                                    }
-                                }
-                                dataSw.put(swInput, Arrays.asList(defiInput));
-                            }
-                        }
-                        this.slangWords.setListSw(dataSw);
-                        this.slangWords.saveFile(this.slangWords.getFileSW(), dataSw, false);
+                        slangWords.editSlangWord(sw, defi, swInput , defiInput);
                         loadDataSw(dataSw);
                         JOptionPane.showMessageDialog(this, "Cập nhật slang word thành công"
                                 , "Thông báo", JOptionPane.INFORMATION_MESSAGE);

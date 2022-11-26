@@ -34,3 +34,7 @@ SLNA`Test
 SLNA`Test| Test duplicate
 SLNA`Test| Test duplicate
 SLNA`Test
+SOK`That's OK
+SAD`Pathetic| Seasonal Adjustment Disorder
+>.<`Frustrated| angry| upset| in pain
+BBA`con mèo, con chó
