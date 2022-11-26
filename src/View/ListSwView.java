@@ -179,7 +179,7 @@ public class ListSwView extends JFrame implements ActionListener {
                 if (click == JOptionPane.YES_OPTION) {
                     HashMap<String, List<String>> swAndDefi = slangWords.findSlangWord(swSearch);
                     if (swAndDefi.size() == 0) {
-                        JOptionPane.showMessageDialog(this, "Không tồn tại slang word!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Không tồn tại slang word!!!", "Thông báo", JOptionPane.ERROR_MESSAGE);
                     } else {
                         loadDataSw(swAndDefi);
                     }
@@ -187,7 +187,7 @@ public class ListSwView extends JFrame implements ActionListener {
                 else if (click == JOptionPane.NO_OPTION) {
                     HashMap<String, List<String>> swAndDefi = slangWords.findDefinition(swSearch);
                     if (swAndDefi.size() == 0) {
-                        JOptionPane.showMessageDialog(this, "Không tồn tại definition!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Không tồn tại definition!!!", "Thông báo", JOptionPane.ERROR_MESSAGE);
                     } else {
                         loadDataSw(swAndDefi);
                     }
@@ -301,7 +301,7 @@ public class ListSwView extends JFrame implements ActionListener {
                         }
                     } else {
                         JOptionPane.showMessageDialog(this, "Không tồn tại definition muốn xóa!!!"
-                                , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                                , "Thông báo", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
