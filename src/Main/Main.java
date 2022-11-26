@@ -1,4 +1,5 @@
 package Main;
+
 import View.MenuView;
 
 public class Main {

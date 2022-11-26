@@ -25,7 +25,7 @@ public class HistorySwView extends JFrame implements ActionListener {
         JFrame.setDefaultLookAndFeelDecorated(true);
         this.setTitle("Lịch sử slang word đã tìm kiếm");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000,600);
+        this.setSize(1000, 600);
         this.setLocationRelativeTo(null);
 
         header = new JLabel("Lịch sử slang word đã tìm kiếm", JLabel.CENTER);
@@ -65,7 +65,7 @@ public class HistorySwView extends JFrame implements ActionListener {
         ImageIcon backImg = new ImageIcon("Go-back-icon.png");
         btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
-        btnBack.setPreferredSize(new Dimension(100,50));
+        btnBack.setPreferredSize(new Dimension(100, 50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
@@ -85,8 +85,8 @@ public class HistorySwView extends JFrame implements ActionListener {
         HashMap<String, List<String>> swAndDefiSearched = this.slangWords.readHistory();
         Set<String> keySetSw = swAndDefiSearched.keySet();
         int index = 1;
-        for(String key : keySetSw) {
-            for(String defi : swAndDefiSearched.get(key)) {
+        for (String key : keySetSw) {
+            for (String defi : swAndDefiSearched.get(key)) {
                 Vector<String> vec = new Vector<>();
                 vec.add(String.valueOf(index));
                 vec.add(key);
@@ -96,6 +96,7 @@ public class HistorySwView extends JFrame implements ActionListener {
             }
         }
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String strAction = e.getActionCommand();

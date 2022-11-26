@@ -26,7 +26,7 @@ public class RandomSlangWordTodayView extends JFrame implements ActionListener {
         JFrame.setDefaultLookAndFeelDecorated(true);
         this.setTitle("Danh sách slang word");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(400,400);
+        this.setSize(400, 400);
         this.setLocationRelativeTo(null);
 
         header = new JLabel("On this day slang word", JLabel.CENTER);
@@ -71,14 +71,14 @@ public class RandomSlangWordTodayView extends JFrame implements ActionListener {
         ImageIcon backImg = new ImageIcon("Go-back-icon.png");
         btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
-        btnBack.setPreferredSize(new Dimension(100,50));
+        btnBack.setPreferredSize(new Dimension(100, 50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
         ImageIcon resetImg = new ImageIcon("Restore-Window-icon.png");
-        btnReset= new JButton("Reset", resetImg);
+        btnReset = new JButton("Reset", resetImg);
         btnReset.addActionListener(this);
-        btnReset.setPreferredSize(new Dimension(100,50));
+        btnReset.setPreferredSize(new Dimension(100, 50));
         btnReset.setBackground(new Color(63, 114, 175));
         btnReset.setForeground(Color.white);
 
@@ -104,8 +104,7 @@ public class RandomSlangWordTodayView extends JFrame implements ActionListener {
         if (strAction.equals("Quay lại")) {
             this.dispose();
             new MenuView();
-        }
-        else if(strAction.equals("Reset")) {
+        } else if (strAction.equals("Reset")) {
             swRandom = this.slangWords.randomSlangWord();
             swLabelOutput.setText(swRandom[0]);
             defiLabelOutput.setText(swRandom[1]);

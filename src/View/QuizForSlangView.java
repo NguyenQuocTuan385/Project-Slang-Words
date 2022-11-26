@@ -21,7 +21,7 @@ public class QuizForSlangView extends JFrame implements ActionListener {
     private JButton btnC;
     private JButton btnD;
     private JButton btnReset;
-    private  String swQuestion;
+    private String swQuestion;
     private String defiCorrect;
     private int numberClick = 1;
 
@@ -38,8 +38,7 @@ public class QuizForSlangView extends JFrame implements ActionListener {
 
         if (this.option == 1) {
             header = new JLabel("Hãy chọn đáp án đúng với slang word sau đây", JLabel.CENTER);
-        }
-        else {
+        } else {
             header = new JLabel("Hãy chọn đáp án đúng với definition sau đây", JLabel.CENTER);
         }
 
@@ -56,7 +55,7 @@ public class QuizForSlangView extends JFrame implements ActionListener {
         jPanelTop.add(header, BorderLayout.PAGE_START);
         jPanelTop.add(swQuestionLabel, BorderLayout.CENTER);
 
-        JPanel jPanelBody = new JPanel(new GridLayout(2,2,10,10));
+        JPanel jPanelBody = new JPanel(new GridLayout(2, 2, 10, 10));
 
         btnA = new JButton("A");
         btnA.addActionListener(this);
@@ -92,14 +91,14 @@ public class QuizForSlangView extends JFrame implements ActionListener {
         ImageIcon backImg = new ImageIcon("Go-back-icon.png");
         btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
-        btnBack.setPreferredSize(new Dimension(100,50));
+        btnBack.setPreferredSize(new Dimension(100, 50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
         ImageIcon resetImg = new ImageIcon("Restore-Window-icon.png");
-        btnReset= new JButton("Reset", resetImg);
+        btnReset = new JButton("Reset", resetImg);
         btnReset.addActionListener(this);
-        btnReset.setPreferredSize(new Dimension(100,50));
+        btnReset.setPreferredSize(new Dimension(100, 50));
         btnReset.setBackground(new Color(63, 114, 175));
         btnReset.setForeground(Color.white);
 
@@ -122,18 +121,16 @@ public class QuizForSlangView extends JFrame implements ActionListener {
         HashMap<String, Integer> swAndDefiQuiz = new HashMap<>();
         if (option == 1) {
             swAndDefiQuiz = slangWords.quiz(1);
-        }
-        else {
+        } else {
             swAndDefiQuiz = slangWords.quiz(2);
         }
 
         List<String> defiAnswer = new ArrayList<>();
         Set<String> swAndDefi = swAndDefiQuiz.keySet();
-        for(String swDefi : swAndDefi) {
-            if(swAndDefiQuiz.get(swDefi) == 2) {
+        for (String swDefi : swAndDefi) {
+            if (swAndDefiQuiz.get(swDefi) == 2) {
                 swQuestion = swDefi;
-            }
-            else {
+            } else {
                 defiAnswer.add(swDefi);
             }
             if (swAndDefiQuiz.get(swDefi) == 1) {
@@ -156,16 +153,14 @@ public class QuizForSlangView extends JFrame implements ActionListener {
         if (strAction.equals("Quay lại")) {
             this.dispose();
             new MenuView();
-        }
-        else if (strAction.equals("Reset")) {
+        } else if (strAction.equals("Reset")) {
             this.loadDataQuiz(this.option);
             numberClick = 1;
             btnA.setBackground(new Color(219, 226, 239));
             btnB.setBackground(new Color(219, 226, 239));
             btnC.setBackground(new Color(219, 226, 239));
             btnD.setBackground(new Color(219, 226, 239));
-        }
-        else if (strAction.equals("A") && numberClick == 1) {
+        } else if (strAction.equals("A") && numberClick == 1) {
             if (btnA.getText().equals(defiCorrect)) {
                 btnA.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(this, "Chúc mừng bạn đã chọn đáp án đúng!!!", "Thông báo"
@@ -177,80 +172,66 @@ public class QuizForSlangView extends JFrame implements ActionListener {
 
                 if (btnB.getText().equals(defiCorrect)) {
                     btnB.setBackground(Color.GREEN);
-                }
-                else if (btnC.getText().equals(defiCorrect)) {
+                } else if (btnC.getText().equals(defiCorrect)) {
                     btnC.setBackground(Color.GREEN);
-                }
-                else if (btnD.getText().equals(defiCorrect)) {
+                } else if (btnD.getText().equals(defiCorrect)) {
                     btnD.setBackground(Color.GREEN);
                 }
             }
             numberClick++;
-        }
-        else if (strAction.equals("B") && numberClick == 1) {
+        } else if (strAction.equals("B") && numberClick == 1) {
             if (btnB.getText().equals(defiCorrect)) {
                 btnB.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(this, "Chúc mừng bạn đã chọn đáp án đúng!!!", "Thông báo"
                         , JOptionPane.INFORMATION_MESSAGE);
-            }
-            else {
+            } else {
                 btnB.setBackground(Color.RED);
                 JOptionPane.showMessageDialog(this, "Rất tiếc bạn đã chọn đáp án sai!!!", "Thông báo"
                         , JOptionPane.ERROR_MESSAGE);
 
                 if (btnA.getText().equals(defiCorrect)) {
                     btnA.setBackground(Color.GREEN);
-                }
-                else if (btnC.getText().equals(defiCorrect)) {
+                } else if (btnC.getText().equals(defiCorrect)) {
                     btnC.setBackground(Color.GREEN);
-                }
-                else if (btnD.getText().equals(defiCorrect)) {
+                } else if (btnD.getText().equals(defiCorrect)) {
                     btnD.setBackground(Color.GREEN);
                 }
             }
             numberClick++;
-        }
-        else if (strAction.equals("C") && numberClick == 1) {
+        } else if (strAction.equals("C") && numberClick == 1) {
             if (btnC.getText().equals(defiCorrect)) {
                 btnC.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(this, "Chúc mừng bạn đã chọn đáp án đúng!!!", "Thông báo"
                         , JOptionPane.INFORMATION_MESSAGE);
-            }
-            else {
+            } else {
                 btnC.setBackground(Color.RED);
                 JOptionPane.showMessageDialog(this, "Rất tiếc bạn đã chọn đáp án sai!!!", "Thông báo"
                         , JOptionPane.ERROR_MESSAGE);
 
                 if (btnA.getText().equals(defiCorrect)) {
                     btnA.setBackground(Color.GREEN);
-                }
-                else if (btnB.getText().equals(defiCorrect)) {
+                } else if (btnB.getText().equals(defiCorrect)) {
                     btnB.setBackground(Color.GREEN);
-                }
-                else if (btnD.getText().equals(defiCorrect)) {
+                } else if (btnD.getText().equals(defiCorrect)) {
                     btnD.setBackground(Color.GREEN);
                 }
             }
             numberClick++;
-        }
-        else if (strAction.equals("D") && numberClick == 1) {
+        } else if (strAction.equals("D") && numberClick == 1) {
             if (btnD.getText().equals(defiCorrect)) {
                 btnD.setBackground(Color.GREEN);
                 JOptionPane.showMessageDialog(this, "Chúc mừng bạn đã chọn đáp án đúng!!!", "Thông báo"
                         , JOptionPane.INFORMATION_MESSAGE);
-            }
-            else {
+            } else {
                 btnD.setBackground(Color.RED);
                 JOptionPane.showMessageDialog(this, "Rất tiếc bạn đã chọn đáp án sai!!!", "Thông báo"
                         , JOptionPane.ERROR_MESSAGE);
 
                 if (btnA.getText().equals(defiCorrect)) {
                     btnA.setBackground(Color.GREEN);
-                }
-                else if (btnB.getText().equals(defiCorrect)) {
+                } else if (btnB.getText().equals(defiCorrect)) {
                     btnB.setBackground(Color.GREEN);
-                }
-                else if (btnC.getText().equals(defiCorrect)) {
+                } else if (btnC.getText().equals(defiCorrect)) {
                     btnC.setBackground(Color.GREEN);
                 }
             }

@@ -1,6 +1,4 @@
 package Model;
-
-import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -9,23 +7,13 @@ public class SlangWords {
     private final String fileSlangWord = "slang.txt";
     private final String fileSlangWordOrigin = "slangOrigin.txt";
     private final String fileSlangWordHistory = "slangHistory.txt";
-    static Scanner sc = new Scanner(System.in);
-
     public HashMap<String, List<String>> getListSw() {
         return sw;
     }
     public SlangWords() {
         this.sw = readFile(fileSlangWord);
     }
-
-    public String getFileSW() {
-        return fileSlangWord;
-    }
-    public void setListSw(HashMap<String, List<String>> sw) {
-        this.sw = sw;
-    }
-
-    public HashMap<String, List<String>> readFile(String inputFile) {
+    public HashMap<String, List<String>> readFile(String inputFile) { //Đọc file slang word
         HashMap<String, List<String>> swAndDefi = new HashMap<>();
         try {
             BufferedReader fin = new BufferedReader(new FileReader(inputFile));
@@ -62,7 +50,7 @@ public class SlangWords {
         return swAndDefi;
     }
 
-    public void resetSlangWord() {
+    public void resetSlangWord() { //Khôi phục danh sách slang word về bản gốc
         try {
             this.sw = this.readFile(fileSlangWordOrigin);
             this.saveFile(fileSlangWord, this.sw, false);
@@ -71,7 +59,7 @@ public class SlangWords {
         }
     }
 
-    public void saveFile(String outputFile, HashMap<String, List<String>> swAndDefi, boolean append) {
+    public void saveFile(String outputFile, HashMap<String, List<String>> swAndDefi, boolean append) { //Lưu file slang word
         try {
             BufferedWriter fout = new BufferedWriter(new FileWriter(outputFile, append));
             Set<String> keySetSw = swAndDefi.keySet();
@@ -91,7 +79,7 @@ public class SlangWords {
         }
     }
 
-    public HashMap<String, List<String>> findSlangWord(String slangWord) {
+    public HashMap<String, List<String>> findSlangWord(String slangWord) { //Tìm kiếm slang word trong danh sách
         HashMap<String, List<String>> swAndDefi = new HashMap<>();
 
         if (sw.containsKey(slangWord)) {
@@ -126,7 +114,7 @@ public class SlangWords {
         return swAndDefi;
     }
 
-    public void saveHistory(HashMap<String, List<String>> swAndDefi) {
+    public void saveHistory(HashMap<String, List<String>> swAndDefi) { //Lưu lại lịch sử tìm kiếm slang word thành công
         this.saveFile(fileSlangWordHistory, swAndDefi, true);
     }
 
@@ -134,15 +122,15 @@ public class SlangWords {
         return this.readFile(fileSlangWordHistory);
     }
 
-    public void addSlangWord(String slangWord, String defi, int choice) {
-        if (choice == 1) {
+    public void addSlangWord(String slangWord, String defi, int choice) { //Thêm slang word vào trong danh sách
+        if (choice == 1) { //Overwrite
             sw.get(slangWord).set(0, defi);
             this.saveFile(fileSlangWord, this.sw, false);
-        } else if (choice == 2) {
+        } else if (choice == 2) { //Duplicate
             sw.get(slangWord).add(defi);
             this.saveFile(fileSlangWord, this.sw, false);
         }
-         else if (choice == 3) {
+         else if (choice == 3) { //Thêm slang word vào danh sách nếu chưa từng tồn tại
             List<String> listDefi = new ArrayList<String>();
             listDefi.add(defi);
             sw.put(slangWord, listDefi);
@@ -150,11 +138,11 @@ public class SlangWords {
         }
     }
 
-    public void deleteSlangWord(String slangWord, String defi, int option) {
+    public void deleteSlangWord(String slangWord, String defi, int option) { //Xóa slang word ra khỏi hệ thống
         if(option == 1) { //Xóa lun slang word đó
             sw.remove(slangWord);
         }
-        else {
+        else { //Nếu chỉ muốn xóa defi trong slang word đó
             if (sw.get(slangWord).size() == 1) //Trong slang word bị sửa chỉ có một definition
             {
                 sw.remove(slangWord); //Xóa slang word đó
@@ -171,6 +159,7 @@ public class SlangWords {
         this.saveFile(fileSlangWord, this.sw, false);
     }
 
+    //Chỉnh sửa slang  word
     public void editSlangWord(String slangWordOld, String defiOld, String slangWordNew, String defiNew) {
         if (slangWordNew.equals(slangWordOld)) {  //Không sửa tên slang word
             int index = 0;
@@ -194,15 +183,18 @@ public class SlangWords {
         this.saveFile(fileSlangWord, this.sw, false);
     }
 
+    //Hàm giả về giá trị số ngẫu nhiên từ [min,max]
     public static int randomMinMax(int min, int max) {
         return (int) (Math.random() * (max - min + 1) + min);
     }
 
+    //Hàm trả về slang word ngẫu nhiên và defi ngẫu nhiên của slang word đó
     public String[] randomSlangWord() {
         int indexRandSw = randomMinMax(0, sw.size() - 1);
         int index = 0;
         Set<String> keySetSw = sw.keySet();
         String[] swAndDefi = new String[2];
+
         for (String key : keySetSw) {
             if (index == indexRandSw) {
                 int indexRandDefi = randomMinMax(0, sw.get(key).size() - 1);
@@ -215,11 +207,12 @@ public class SlangWords {
         return swAndDefi;
     }
 
+    //Hàm trả về slang word vs 4 đáp án defi hoặc defi vs 4 đáp án slang word
     public HashMap<String, Integer> quiz(int option) {
         HashMap<String, Integer> swAndDefiQuiz = new HashMap<>();
         String[] SwAndDefiRand = randomSlangWord();
 
-        if (option == 1) {
+        if (option == 1) { //Quiz về slang word
             Set<String> threeDefiTemp = new HashSet<>();
             int numberDefi = 0;
             swAndDefiQuiz.put(SwAndDefiRand[0],2); //2 là slang word
@@ -237,7 +230,7 @@ public class SlangWords {
             for(String defi : threeDefiTemp) {
                 swAndDefiQuiz.put(defi, 0); //0 có nghĩa l definition sai
             }
-        } else {
+        } else { //Quiz về defi
             Set<String> threeSwTemp = new HashSet<>();
             int numberSw = 0;
             swAndDefiQuiz.put(SwAndDefiRand[1],2); //2 là defintion

@@ -16,6 +16,7 @@ public class MenuView extends JFrame implements ActionListener {
     private JButton btnRandomSW;
     private JButton btnQuizAboutSW;
     private JButton btnQuizAboutDefi;
+    private JButton btnExit;
     private JLabel footerSlangWord;
 
     public MenuView() {
@@ -24,7 +25,7 @@ public class MenuView extends JFrame implements ActionListener {
         JFrame.setDefaultLookAndFeelDecorated(true);
         this.setTitle("Slang word");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000,600);
+        this.setSize(1000, 600);
         this.setLocationRelativeTo(null);
         this.setBackground(new Color(249, 247, 247));
 
@@ -38,7 +39,7 @@ public class MenuView extends JFrame implements ActionListener {
         jPanelTop.add(headerSlangWord);
 
         ImageIcon listImg = new ImageIcon("list-icon.png");
-        btnListSw = new JButton("Danh sách các slang word",listImg);
+        btnListSw = new JButton("Danh sách các slang word", listImg);
         btnListSw.addActionListener(this);
         btnListSw.setBackground(new Color(63, 114, 175));
         btnListSw.setForeground(Color.white);
@@ -70,13 +71,21 @@ public class MenuView extends JFrame implements ActionListener {
         btnQuizAboutDefi.setForeground(Color.white);
         btnQuizAboutDefi.setFont(fontBody);
 
+        ImageIcon exitImg = new ImageIcon("Exit-icon.png");
+        btnExit = new JButton("Thoát", exitImg);
+        btnExit.addActionListener(this);
+        btnExit.setBackground(new Color(63, 114, 175));
+        btnExit.setForeground(Color.white);
+        btnExit.setFont(fontBody);
+
         JPanel jPanelBody = new JPanel();
-        jPanelBody.setLayout(new GridLayout(3,5, 20, 20));
+        jPanelBody.setLayout(new GridLayout(3, 5, 20, 20));
         jPanelBody.add(btnListSw);
         jPanelBody.add(btnShowHistory);
         jPanelBody.add(btnRandomSW);
         jPanelBody.add(btnQuizAboutSW);
         jPanelBody.add(btnQuizAboutDefi);
+        jPanelBody.add(btnExit);
 
         footerSlangWord = new JLabel("20127659 - Nguyễn Quốc Tuấn");
         footerSlangWord.setFont(fontHeaderAndFooter);
@@ -94,6 +103,7 @@ public class MenuView extends JFrame implements ActionListener {
 
         this.setVisible(true);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String strAction = e.getActionCommand();
@@ -112,6 +122,8 @@ public class MenuView extends JFrame implements ActionListener {
         } else if (strAction.equals("Quiz về Definition")) {
             this.dispose();
             new QuizForSlangView(this.sw, 2);
+        } else if (strAction.equals("Thoát")) {
+            this.dispose();
         }
     }
 }

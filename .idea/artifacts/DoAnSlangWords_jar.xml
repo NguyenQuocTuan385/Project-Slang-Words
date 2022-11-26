@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DoAnSlangWords:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DoAnSlangWords_jar</output-path>
+    <root id="archive" name="DoAnSlangWords.jar">
+      <element id="module-output" name="DoAnSlangWords" />
+    </root>
+  </artifact>
+</component>

@@ -35,7 +35,7 @@ public class ListSwView extends JFrame implements ActionListener {
         JFrame.setDefaultLookAndFeelDecorated(true);
         this.setTitle("Danh sách slang word");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000,600);
+        this.setSize(1000, 600);
         this.setLocationRelativeTo(null);
 
         jTextSearch = new JTextField(40);
@@ -93,35 +93,35 @@ public class ListSwView extends JFrame implements ActionListener {
         ImageIcon backImg = new ImageIcon("Go-back-icon.png");
         btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
-        btnBack.setPreferredSize(new Dimension(100,50));
+        btnBack.setPreferredSize(new Dimension(100, 50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
         ImageIcon addImg = new ImageIcon("add-1-icon.png");
         btnAdd = new JButton("Thêm", addImg);
         btnAdd.addActionListener(this);
-        btnAdd.setPreferredSize(new Dimension(100,50));
+        btnAdd.setPreferredSize(new Dimension(100, 50));
         btnAdd.setBackground(new Color(63, 114, 175));
         btnAdd.setForeground(Color.white);
 
         ImageIcon deleteImg = new ImageIcon("Button-Close-icon.png");
         btnDelete = new JButton("Xóa", deleteImg);
         btnDelete.addActionListener(this);
-        btnDelete.setPreferredSize(new Dimension(100,50));
+        btnDelete.setPreferredSize(new Dimension(100, 50));
         btnDelete.setBackground(new Color(63, 114, 175));
         btnDelete.setForeground(Color.white);
 
         ImageIcon updateImg = new ImageIcon("Actions-document-edit-icon.png");
         btnUpdate = new JButton("Cập nhật", updateImg);
         btnUpdate.addActionListener(this);
-        btnUpdate.setPreferredSize(new Dimension(130,50));
+        btnUpdate.setPreferredSize(new Dimension(130, 50));
         btnUpdate.setBackground(new Color(63, 114, 175));
         btnUpdate.setForeground(Color.white);
 
         ImageIcon resetImg = new ImageIcon("Restore-Window-icon.png");
-        btnReset= new JButton("Khôi phục", resetImg);
+        btnReset = new JButton("Khôi phục", resetImg);
         btnReset.addActionListener(this);
-        btnReset.setPreferredSize(new Dimension(130,50));
+        btnReset.setPreferredSize(new Dimension(130, 50));
         btnReset.setBackground(new Color(63, 114, 175));
         btnReset.setForeground(Color.white);
 
@@ -147,8 +147,8 @@ public class ListSwView extends JFrame implements ActionListener {
         dtmSw.setRowCount(0);
         Set<String> keySetSw = data.keySet();
         int index = 1;
-        for(String key : keySetSw) {
-            for(String defi : data.get(key)) {
+        for (String key : keySetSw) {
+            for (String defi : data.get(key)) {
                 Vector<String> vec = new Vector<>();
                 vec.add(String.valueOf(index));
                 vec.add(key);
@@ -164,11 +164,10 @@ public class ListSwView extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String strAction = e.getActionCommand();
-        if (strAction.equals("Quay lại")) {
+        if (strAction.equals("Quay lại")) { //Nhấn vào button quay lại
             this.dispose();
             new MenuView();
-        }
-        else if(strAction.equals("Tìm kiếm")) {
+        } else if (strAction.equals("Tìm kiếm")) { //Nhấn vào button tìm kiếm
             String swSearch = jTextSearch.getText();
             if (swSearch.equals("")) {
                 loadDataSw(dataSw);
@@ -183,8 +182,7 @@ public class ListSwView extends JFrame implements ActionListener {
                     } else {
                         loadDataSw(swAndDefi);
                     }
-                }
-                else if (click == JOptionPane.NO_OPTION) {
+                } else if (click == JOptionPane.NO_OPTION) {
                     HashMap<String, List<String>> swAndDefi = slangWords.findDefinition(swSearch);
                     if (swAndDefi.size() == 0) {
                         JOptionPane.showMessageDialog(this, "Không tồn tại definition!!!", "Thông báo", JOptionPane.ERROR_MESSAGE);
@@ -193,8 +191,7 @@ public class ListSwView extends JFrame implements ActionListener {
                     }
                 }
             }
-        }
-        else if (strAction.equals("Thêm")) {
+        } else if (strAction.equals("Thêm")) { //Nhấn vào button thêm
             swField = new JTextField(20);
             defiField = new JTextField(20);
 
@@ -226,12 +223,11 @@ public class ListSwView extends JFrame implements ActionListener {
             String defiInput = defiField.getText();
 
             if (result == JOptionPane.OK_OPTION) {
-                if(swInput.equals("") || defiInput.equals("")) {
+                if (swInput.equals("") || defiInput.equals("")) {
                     JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word hoặc defi!!!", "Cảnh báo"
                             , JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    if(dataSw.containsKey(swInput)) {
+                } else {
+                    if (dataSw.containsKey(swInput)) {
                         Object[] options = {"Overwrite", "Duplicate"};
                         int click = JOptionPane.showOptionDialog(null, "Lựa chọn ghi đè"
                                 , "Đã tồn tại slang word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
@@ -239,14 +235,12 @@ public class ListSwView extends JFrame implements ActionListener {
                             this.slangWords.addSlangWord(swInput, defiInput, 1);
                             dataSw = slangWords.getListSw();
                             loadDataSw(dataSw);
-                        }
-                        else if (click == JOptionPane.NO_OPTION) {
+                        } else if (click == JOptionPane.NO_OPTION) {
                             this.slangWords.addSlangWord(swInput, defiInput, 2);
                             dataSw = slangWords.getListSw();
                             loadDataSw(dataSw);
                         }
-                    }
-                    else {
+                    } else {
                         this.slangWords.addSlangWord(swInput, defiInput, 3);
                         dataSw = slangWords.getListSw();
                         loadDataSw(dataSw);
@@ -255,8 +249,7 @@ public class ListSwView extends JFrame implements ActionListener {
                     }
                 }
             }
-        }
-        else if (strAction.equals("Xóa")) {
+        } else if (strAction.equals("Xóa")) { //Nhấn vào button xóa
             if (!jTableSw.getSelectionModel().isSelectionEmpty()) { //Đang lựa chọn row trong table
                 DefaultTableModel model = (DefaultTableModel) jTableSw.getModel();
 
@@ -271,8 +264,7 @@ public class ListSwView extends JFrame implements ActionListener {
                     slangWords.deleteSlangWord(sw, defi, 2);
                     loadDataSw(dataSw);
                 }
-            }
-            else { //Đang không lựa chọn row trong table
+            } else { //Đang không lựa chọn row trong table
                 JTextField swField = new JTextField(20);
 
                 JLabel headerDeletePanel = new JLabel("Vui lòng nhập Slang word muốn xóa");
@@ -302,9 +294,8 @@ public class ListSwView extends JFrame implements ActionListener {
                     if (swInput.equals("")) {
                         JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word!!!", "Cảnh báo"
                                 , JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        if(dataSw.containsKey(swInput)) {
+                    } else {
+                        if (dataSw.containsKey(swInput)) {
                             Object[] options = {"Ok", "Cancel"};
                             int click = JOptionPane.showOptionDialog(null, "Bạn có thật sự muốn xóa Slang word này không?"
                                     , "Xác nhận xóa Slang word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
@@ -322,8 +313,7 @@ public class ListSwView extends JFrame implements ActionListener {
                     }
                 }
             }
-        }
-        else if(strAction.equals("Cập nhật")) {
+        } else if (strAction.equals("Cập nhật")) { //Nhấn vào button cập nhật
             if (!jTableSw.getSelectionModel().isSelectionEmpty()) {
                 swField = new JTextField(20);
                 defiField = new JTextField(20);
@@ -331,8 +321,8 @@ public class ListSwView extends JFrame implements ActionListener {
                 DefaultTableModel model = (DefaultTableModel) jTableSw.getModel();
 
                 int selectedRowIndex = jTableSw.getSelectedRow();
-                String sw = model.getValueAt(selectedRowIndex,1).toString();
-                String defi = model.getValueAt(selectedRowIndex,2).toString();
+                String sw = model.getValueAt(selectedRowIndex, 1).toString();
+                String defi = model.getValueAt(selectedRowIndex, 2).toString();
 
                 swField.setText(sw);
                 defiField.setText(defi);
@@ -365,20 +355,18 @@ public class ListSwView extends JFrame implements ActionListener {
                 String defiInput = defiField.getText();
 
                 if (result == JOptionPane.OK_OPTION) {
-                    if(swInput.equals("") || defiInput.equals("")) {
+                    if (swInput.equals("") || defiInput.equals("")) {
                         JOptionPane.showMessageDialog(this, "Bạn chưa nhập slang word hoặc defi!!!", "Cảnh báo"
                                 , JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        slangWords.editSlangWord(sw, defi, swInput , defiInput);
+                    } else {
+                        slangWords.editSlangWord(sw, defi, swInput, defiInput);
                         loadDataSw(dataSw);
                         JOptionPane.showMessageDialog(this, "Cập nhật slang word thành công"
                                 , "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }
-        }
-        else if(strAction.equals("Khôi phục")) {
+        } else if (strAction.equals("Khôi phục")) { //Nhấn vào button khôi phục
             Object[] options = {"Ok", "Cancel"};
             int click = JOptionPane.showOptionDialog(null, "Bạn có thật sự muốn khôi phục danh sách Slang word không?"
                     , "Xác nhận khôi phục Slang word", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
