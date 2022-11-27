@@ -61,7 +61,7 @@ public class HistorySwView extends JFrame implements ActionListener {
         JPanel jPanelBody = new JPanel();
         jPanelBody.add(sc);
 
-        ImageIcon backImg = new ImageIcon("Go-back-icon.png");
+        ImageIcon backImg = new ImageIcon("./images/Go-back-icon.png");
         JButton btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100, 50));

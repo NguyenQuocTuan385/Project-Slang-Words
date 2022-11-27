@@ -33,7 +33,7 @@ public class ListSwView extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
 
         jTextSearch = new JTextField(40);
-        ImageIcon searchImg = new ImageIcon("Zoom-icon.png");
+        ImageIcon searchImg = new ImageIcon("./images/Zoom-icon.png");
 
         JButton btnSearch = new JButton("Tìm kiếm", searchImg);
         btnSearch.addActionListener(this);
@@ -84,35 +84,35 @@ public class ListSwView extends JFrame implements ActionListener {
         JPanel jPanelBody = new JPanel();
         jPanelBody.add(sc);
 
-        ImageIcon backImg = new ImageIcon("Go-back-icon.png");
+        ImageIcon backImg = new ImageIcon("./images/Go-back-icon.png");
         JButton btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100, 50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
-        ImageIcon addImg = new ImageIcon("add-1-icon.png");
+        ImageIcon addImg = new ImageIcon("./images/add-1-icon.png");
         JButton btnAdd = new JButton("Thêm", addImg);
         btnAdd.addActionListener(this);
         btnAdd.setPreferredSize(new Dimension(100, 50));
         btnAdd.setBackground(new Color(63, 114, 175));
         btnAdd.setForeground(Color.white);
 
-        ImageIcon deleteImg = new ImageIcon("Button-Close-icon.png");
+        ImageIcon deleteImg = new ImageIcon("./images/Button-Close-icon.png");
         JButton btnDelete = new JButton("Xóa", deleteImg);
         btnDelete.addActionListener(this);
         btnDelete.setPreferredSize(new Dimension(100, 50));
         btnDelete.setBackground(new Color(63, 114, 175));
         btnDelete.setForeground(Color.white);
 
-        ImageIcon updateImg = new ImageIcon("Actions-document-edit-icon.png");
+        ImageIcon updateImg = new ImageIcon("./images/Actions-document-edit-icon.png");
         JButton btnUpdate = new JButton("Cập nhật", updateImg);
         btnUpdate.addActionListener(this);
         btnUpdate.setPreferredSize(new Dimension(130, 50));
         btnUpdate.setBackground(new Color(63, 114, 175));
         btnUpdate.setForeground(Color.white);
 
-        ImageIcon resetImg = new ImageIcon("Restore-Window-icon.png");
+        ImageIcon resetImg = new ImageIcon("./images/Restore-Window-icon.png");
         JButton btnReset = new JButton("Khôi phục", resetImg);
         btnReset.addActionListener(this);
         btnReset.setPreferredSize(new Dimension(130, 50));

@@ -31,21 +31,21 @@ public class MenuView extends JFrame implements ActionListener {
         JPanel jPanelTop = new JPanel();
         jPanelTop.add(headerSlangWord);
 
-        ImageIcon listImg = new ImageIcon("list-icon.png");
+        ImageIcon listImg = new ImageIcon("./images/list-icon.png");
         JButton btnListSw = new JButton("Danh sách các slang word", listImg);
         btnListSw.addActionListener(this);
         btnListSw.setBackground(new Color(63, 114, 175));
         btnListSw.setForeground(Color.white);
         btnListSw.setFont(fontBody);
 
-        ImageIcon historyImg = new ImageIcon("history-icon.png");
+        ImageIcon historyImg = new ImageIcon("./images/history-icon.png");
         JButton btnShowHistory = new JButton("Lịch sử các slang word đã tìm kiếm", historyImg);
         btnShowHistory.addActionListener(this);
         btnShowHistory.setBackground(new Color(63, 114, 175));
         btnShowHistory.setForeground(Color.white);
         btnShowHistory.setFont(fontBody);
 
-        ImageIcon quizImg = new ImageIcon("quiz-icon.png");
+        ImageIcon quizImg = new ImageIcon("./images/quiz-icon.png");
         JButton btnRandomSW = new JButton("Random slang word hôm nay", quizImg);
         btnRandomSW.addActionListener(this);
         btnRandomSW.setBackground(new Color(63, 114, 175));
@@ -64,7 +64,7 @@ public class MenuView extends JFrame implements ActionListener {
         btnQuizAboutDefi.setForeground(Color.white);
         btnQuizAboutDefi.setFont(fontBody);
 
-        ImageIcon exitImg = new ImageIcon("Exit-icon.png");
+        ImageIcon exitImg = new ImageIcon("./images/Exit-icon.png");
         JButton btnExit = new JButton("Thoát", exitImg);
         btnExit.addActionListener(this);
         btnExit.setBackground(new Color(63, 114, 175));

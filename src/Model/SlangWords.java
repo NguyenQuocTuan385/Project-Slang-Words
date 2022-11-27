@@ -4,9 +4,9 @@ import java.util.*;
 
 public class SlangWords {
     private HashMap<String, List<String>> sw = new HashMap<>();
-    private final String fileSlangWord = "slang.txt";
-    private final String fileSlangWordOrigin = "slangOrigin.txt";
-    private final String fileSlangWordHistory = "slangHistory.txt";
+    private final String fileSlangWord = "./data/slang.txt";
+    private final String fileSlangWordOrigin = "./data/slangOrigin.txt";
+    private final String fileSlangWordHistory = "./data/slangHistory.txt";
     public HashMap<String, List<String>> getListSw() {
         return sw;
     }

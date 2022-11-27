@@ -85,14 +85,14 @@ public class QuizForSlangView extends JFrame implements ActionListener {
         jPanelBody.add(btnC);
         jPanelBody.add(btnD);
 
-        ImageIcon backImg = new ImageIcon("Go-back-icon.png");
+        ImageIcon backImg = new ImageIcon("./images/Go-back-icon.png");
         JButton btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100, 50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
-        ImageIcon resetImg = new ImageIcon("Restore-Window-icon.png");
+        ImageIcon resetImg = new ImageIcon("./images/Restore-Window-icon.png");
         JButton btnReset = new JButton("Reset", resetImg);
         btnReset.addActionListener(this);
         btnReset.setPreferredSize(new Dimension(100, 50));
