@@ -6,18 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.List;
 
 public class RandomSlangWordTodayView extends JFrame implements ActionListener {
     private SlangWords slangWords;
     private JLabel header;
-    private JButton btnBack;
-    private JButton btnAdd;
     private JLabel swLabelOutput;
     private JLabel defiLabelOutput;
     private String[] swRandom;
-    private JButton btnReset;
 
     public RandomSlangWordTodayView(SlangWords sw) {
         this.slangWords = sw;
@@ -69,14 +64,14 @@ public class RandomSlangWordTodayView extends JFrame implements ActionListener {
         jPanelBody.add(defiPanelOutput, BorderLayout.CENTER);
 
         ImageIcon backImg = new ImageIcon("Go-back-icon.png");
-        btnBack = new JButton("Quay lại", backImg);
+        JButton btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100, 50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
         ImageIcon resetImg = new ImageIcon("Restore-Window-icon.png");
-        btnReset = new JButton("Reset", resetImg);
+        JButton btnReset = new JButton("Reset", resetImg);
         btnReset.addActionListener(this);
         btnReset.setPreferredSize(new Dimension(100, 50));
         btnReset.setBackground(new Color(63, 114, 175));

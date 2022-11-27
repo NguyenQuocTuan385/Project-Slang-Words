@@ -7,3 +7,6 @@ SOK`That's OK
 SAD`Pathetic| Seasonal Adjustment Disorder
 >.<`Frustrated| angry| upset| in pain
 B`Be
+BBA`Test 4| Test 2| Test 3
+BBC`British Broadcasting Corporation
+TASTY`Good looking| Cool| awesome

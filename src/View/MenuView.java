@@ -10,13 +10,6 @@ import java.awt.event.ActionListener;
 public class MenuView extends JFrame implements ActionListener {
     private SlangWords sw;
     private JLabel headerSlangWord;
-    private JButton btnListSw;
-    private JButton btnShowHistory;
-    private JButton btnEditSw;
-    private JButton btnRandomSW;
-    private JButton btnQuizAboutSW;
-    private JButton btnQuizAboutDefi;
-    private JButton btnExit;
     private JLabel footerSlangWord;
 
     public MenuView() {
@@ -39,40 +32,40 @@ public class MenuView extends JFrame implements ActionListener {
         jPanelTop.add(headerSlangWord);
 
         ImageIcon listImg = new ImageIcon("list-icon.png");
-        btnListSw = new JButton("Danh sách các slang word", listImg);
+        JButton btnListSw = new JButton("Danh sách các slang word", listImg);
         btnListSw.addActionListener(this);
         btnListSw.setBackground(new Color(63, 114, 175));
         btnListSw.setForeground(Color.white);
         btnListSw.setFont(fontBody);
 
         ImageIcon historyImg = new ImageIcon("history-icon.png");
-        btnShowHistory = new JButton("Lịch sử các slang word đã tìm kiếm", historyImg);
+        JButton btnShowHistory = new JButton("Lịch sử các slang word đã tìm kiếm", historyImg);
         btnShowHistory.addActionListener(this);
         btnShowHistory.setBackground(new Color(63, 114, 175));
         btnShowHistory.setForeground(Color.white);
         btnShowHistory.setFont(fontBody);
 
         ImageIcon quizImg = new ImageIcon("quiz-icon.png");
-        btnRandomSW = new JButton("Random slang word hôm nay", quizImg);
+        JButton btnRandomSW = new JButton("Random slang word hôm nay", quizImg);
         btnRandomSW.addActionListener(this);
         btnRandomSW.setBackground(new Color(63, 114, 175));
         btnRandomSW.setForeground(Color.white);
         btnRandomSW.setFont(fontBody);
 
-        btnQuizAboutSW = new JButton("Quiz về Slang Word", quizImg);
+        JButton btnQuizAboutSW = new JButton("Quiz về Slang Word", quizImg);
         btnQuizAboutSW.addActionListener(this);
         btnQuizAboutSW.setBackground(new Color(63, 114, 175));
         btnQuizAboutSW.setForeground(Color.white);
         btnQuizAboutSW.setFont(fontBody);
 
-        btnQuizAboutDefi = new JButton("Quiz về Definition", quizImg);
+        JButton btnQuizAboutDefi = new JButton("Quiz về Definition", quizImg);
         btnQuizAboutDefi.addActionListener(this);
         btnQuizAboutDefi.setBackground(new Color(63, 114, 175));
         btnQuizAboutDefi.setForeground(Color.white);
         btnQuizAboutDefi.setFont(fontBody);
 
         ImageIcon exitImg = new ImageIcon("Exit-icon.png");
-        btnExit = new JButton("Thoát", exitImg);
+        JButton btnExit = new JButton("Thoát", exitImg);
         btnExit.addActionListener(this);
         btnExit.setBackground(new Color(63, 114, 175));
         btnExit.setForeground(Color.white);

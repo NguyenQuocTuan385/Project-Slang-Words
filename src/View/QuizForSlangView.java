@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.List;
 
@@ -15,12 +14,10 @@ public class QuizForSlangView extends JFrame implements ActionListener {
     private SlangWords slangWords;
     private JLabel header;
     private JLabel swQuestionLabel;
-    private JButton btnBack;
     private JButton btnA;
     private JButton btnB;
     private JButton btnC;
     private JButton btnD;
-    private JButton btnReset;
     private String swQuestion;
     private String defiCorrect;
     private int numberClick = 1;
@@ -89,14 +86,14 @@ public class QuizForSlangView extends JFrame implements ActionListener {
         jPanelBody.add(btnD);
 
         ImageIcon backImg = new ImageIcon("Go-back-icon.png");
-        btnBack = new JButton("Quay lại", backImg);
+        JButton btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100, 50));
         btnBack.setBackground(new Color(63, 114, 175));
         btnBack.setForeground(Color.white);
 
         ImageIcon resetImg = new ImageIcon("Restore-Window-icon.png");
-        btnReset = new JButton("Reset", resetImg);
+        JButton btnReset = new JButton("Reset", resetImg);
         btnReset.addActionListener(this);
         btnReset.setPreferredSize(new Dimension(100, 50));
         btnReset.setBackground(new Color(63, 114, 175));

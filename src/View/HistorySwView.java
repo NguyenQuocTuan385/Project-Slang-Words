@@ -17,9 +17,8 @@ public class HistorySwView extends JFrame implements ActionListener {
     private DefaultTableModel dtmSw;
     private JTable jTableSw;
     private JLabel header;
-    private JButton btnBack;
 
-    public HistorySwView(SlangWords sw) {
+    public HistorySwView(SlangWords sw) { //Hàm khởi tạo danh sách tìm kiếm lịch sử slang word
         this.slangWords = sw;
 
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -63,7 +62,7 @@ public class HistorySwView extends JFrame implements ActionListener {
         jPanelBody.add(sc);
 
         ImageIcon backImg = new ImageIcon("Go-back-icon.png");
-        btnBack = new JButton("Quay lại", backImg);
+        JButton btnBack = new JButton("Quay lại", backImg);
         btnBack.addActionListener(this);
         btnBack.setPreferredSize(new Dimension(100, 50));
         btnBack.setBackground(new Color(63, 114, 175));
@@ -80,7 +79,7 @@ public class HistorySwView extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public void loadDataSwSearch() {
+    public void loadDataSwSearch() {  //Hàm load data slang word mới vào data table
         dtmSw.setRowCount(0);
         HashMap<String, List<String>> swAndDefiSearched = this.slangWords.readHistory();
         Set<String> keySetSw = swAndDefiSearched.keySet();
